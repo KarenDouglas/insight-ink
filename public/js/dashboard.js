@@ -1,5 +1,6 @@
 const $newEntriesContainer = document.querySelector('#newEntryContainer')
 
+
 let dummyData = [
     {   
         id: 1,
@@ -74,16 +75,20 @@ let dummyData = [
         entry: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus aliquam omnis porro, ad tempore earum deserunt eligendi voluptatem architecto alias sint sunt placeat et, ipsa debitis vitae veniam, repudiandae commodi. Repellendus blanditiis eveniet, dicta sequi facilis minima saepe libero fugiat! Error, cupiditate? Impedit atque eveniet labore expedita eos illum fugit fuga consequuntur nisi, est culpa quos, ex delectus repudiandae sint? Voluptatum cumque corporis hic cupiditate, excepturi, nulla perferendis ab doloribus officia error vitae fuga dolorum deleniti quaerat maiores optio velit obcaec'
     }
 ]
-console.log(dummyData)
+data = dummyData
+
+console.log(data)
 // renders the latest entry prominent on page
 async function renderNewestEntry(){
+    //Delete and Edit Button in DOM
     const $deleteBtn = document.createElement('button')
     const $editBtn = document.createElement('button')
     $deleteBtn.innerHTML= 'delete'
     $editBtn.innerHTML= 'edit'
     $deleteBtn.id = 'deleteBtn'
     $editBtn.id = 'editBtn'
-    let newEntry = dummyData[dummyData.length - 1];
+
+    let newEntry = data[data.length - 1];
 
 
     
@@ -123,20 +128,10 @@ async function renderNewestEntry(){
     $newEntriesContainer.appendChild($deleteBtn)
     $newEntriesContainer.appendChild($editBtn)
     //eventListeners and relevant functions
-    const deleteEntry = async(e) => {
-        if(e.target.id === 'deleteBtn'){ 
-            $newEntriesContainer.removeChild($entryContainer)
-            $newEntriesContainer.removeChild($deleteBtn)
-            $newEntriesContainer.removeChild($editBtn)
-          
-           dummyData.pop()
-           renderNewestEntry()
-           renderPastEntries()
-           console.log(dummyData)   
-        }
-      
-    }
-    deleteBtn.addEventListener('click',deleteEntry)
+
+
+    // TODO: ADD DELETE FUNCTIONALITY TO $DELETEBTN WITH EVENT LISTENER HERE
+    
  };
  
 
@@ -146,22 +141,22 @@ async function renderNewestEntry(){
 async function renderPastEntries() {
     let $deleteBtn = ''
     $pastEntriesContainer.innerHTML= ''
-    for(let i = 0; i< dummyData.length-1; i++){
+    for(let i = 0; i< data.length-1; i++){
      $deleteBtn = document.createElement('button')
     const $editBtn = document.createElement('button')
     const $pastEntryCard = document.createElement('section')
     $deleteBtn.innerHTML= 'delete'
     $editBtn.innerHTML= 'edit'
-    $deleteBtn.id = `deleteBtn-${i+1}`
-    $editBtn.id = `editBtn-${i}`
-        const sentences = dummyData[i].entry.split(/\. |\? |! /);
+    $deleteBtn.id = `deleteBtn-${data[i].id}`
+    $editBtn.id = `editBtn-${data[i].id}`
+        const sentences = data[i].entry.split(/\. |\? |! /);
 
         const firstTwoSentences = sentences.slice(0, 2);
-        $pastEntryCard.id= dummyData[i].id
+        $pastEntryCard.id= data[i].id
         $pastEntryCard.innerHTML+=`
         <section id=>
-        <h2>${dummyData[i].title}</h2>
-        <p>${dummyData[i].mood}</p>
+        <h2>${data[i].title}</h2>
+        <p>${data[i].mood}</p>
         <p>${firstTwoSentences}</p> 
           
         `;
@@ -171,25 +166,8 @@ async function renderPastEntries() {
     $pastEntriesContainer.appendChild($pastEntryCard)
 
     }
-    const deletePastEntry = (e) => {
-       ;
-        if(e.target.id.includes('deleteBtn')){
-           
-            for(let i = 0; i< dummyData.length-1; i++){
-              
-                const btnId = parseInt(e.target.id.split('deleteBtn-')[1])
-                console.log(btnId, dummyData[i].id)
-                if(btnId === dummyData[i].id){
-    
-                    //console.log(parseFloat(dummyData[i].id))
-                    dummyData= dummyData.filter((el) => el.id !== btnId)
-                    renderPastEntries()
-                }
-            }
-            console.log(dummyData)
-        }
-    }
-    $pastEntriesContainer.addEventListener('click', deletePastEntry)
+    // ADD DELETE PAST ENTRIES BUTTON HERE WITH EVENT LISTENERS
+  
     $newEntriesContainer.insertAdjacentElement('afterend', $pastEntriesContainer);
 }
 renderNewestEntry()
