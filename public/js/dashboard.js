@@ -112,5 +112,22 @@ const renderNewestEntry = async () => {
  
 
  
-console.log('hi')
 renderNewestEntry()
+const renderPastEntries = async() => {
+    const $pastEntriesContainer = document.createElement('section')
+    $pastEntriesContainer.id = 'pastEntriesContainer'
+    for(let i = 0; i<dummyData.length-1; i++){
+        const sentences = dummyData[i].entry.split(/\. |\? |! /);
+
+        const firstTwoSentences = sentences.slice(0, 2);
+
+        $pastEntriesContainer.innerHTML += `
+        <h2>${dummyData[i].title}</h2>
+        <p>${dummyData[i].mood}</p>
+        <p>${firstTwoSentences}</p>        
+    `;
+
+    }
+    $newEntriesContainer.append($pastEntriesContainer)
+}
+renderPastEntries()
