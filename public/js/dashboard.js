@@ -71,10 +71,19 @@ const dummyData = [
 ]
 
 
+
 // renders the latest entry prominent on page
-const renderNewestEntry = async () => {
-     const newEntry = dummyData[dummyData.length - 1];
- 
+async function renderNewestEntry(){
+    const $deleteBtn = document.createElement('button')
+    const $editBtn = document.createElement('button')
+    $deleteBtn.innerHTML= 'delete'
+    $editBtn.innerHTML= 'edit'
+    $deleteBtn.id = 'deleteBtn'
+    $editBtn.id = 'editBtn'
+    let newEntry = dummyData[dummyData.length - 1];
+
+
+    
     // Rendering habits list
     const renderHabitsList = () => {
         const $habitsListUl = document.createElement('ul');
@@ -108,15 +117,32 @@ const renderNewestEntry = async () => {
  
     // Append entry container to the main container
     $newEntriesContainer.appendChild($entryContainer);
+    $newEntriesContainer.appendChild($deleteBtn)
+    $newEntriesContainer.appendChild($editBtn)
+    //eventListeners and relevant functions
+    const deleteEntry = async(e) => {
+        if(e.target.id === 'deleteBtn'){ 
+            $newEntriesContainer.removeChild($entryContainer)
+            $newEntriesContainer.removeChild($deleteBtn)
+            $newEntriesContainer.removeChild($editBtn)
+          
+           dummyData.pop()
+           renderNewestEntry()
+           renderPastEntries()
+           console.log(dummyData)   
+        }
+      
+    }
+    deleteBtn.addEventListener('click',deleteEntry)
  };
  
 
- 
-renderNewestEntry()
-const renderPastEntries = async() => {
-    const $pastEntriesContainer = document.createElement('section')
-    $pastEntriesContainer.id = 'pastEntriesContainer'
-    for(let i = 0; i<dummyData.length-1; i++){
+
+ const $pastEntriesContainer = document.createElement('section')
+ $pastEntriesContainer.id = 'pastEntriesContainer'
+async function renderPastEntries() {
+    $pastEntriesContainer.innerHTML= ''
+    for(let i = 0; i< dummyData.length-1; i++){
         const sentences = dummyData[i].entry.split(/\. |\? |! /);
 
         const firstTwoSentences = sentences.slice(0, 2);
@@ -128,6 +154,7 @@ const renderPastEntries = async() => {
     `;
 
     }
-    $newEntriesContainer.append($pastEntriesContainer)
+    $newEntriesContainer.insertAdjacentElement('afterend', $pastEntriesContainer);
 }
+renderNewestEntry()
 renderPastEntries()
