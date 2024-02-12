@@ -9,3 +9,5 @@ const users = [
     },
     // Add more users as needed
   ];
+  const seedUsers = () => Entry.bulkCreate(users);
+  module.exports = { seedUsers };
