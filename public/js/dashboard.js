@@ -131,6 +131,10 @@ async function renderNewestEntry(){
 
 
     // TODO: ADD DELETE FUNCTIONALITY TO $DELETEBTN WITH EVENT LISTENER HERE $deleteBtn ID : deleteBtn
+        $deleteBtn.addEventListener('click', () => {
+            // Call a function to handle the delete action
+            deleteEntry(newEntry.id);
+        });
     
      // TODO: ADD EDIT BUTTON FUNCTIONALITY HERE  $editBtn ID: editBtn
  };
