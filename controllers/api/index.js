@@ -5,7 +5,7 @@ const userRoutes = require('./userRoutes');
 const habitRoutes = require('./habitRoutes');
 const entryRoutes = require('./entryRoutes')
 
-router.use('/user', userRoutes);
+router.use('/users', userRoutes);
 router.use('/habits', habitRoutes);
 router.use('/entry', entryRoutes)
 
