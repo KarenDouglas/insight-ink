@@ -130,8 +130,9 @@ async function renderNewestEntry(){
     //eventListeners and relevant functions
 
 
-    // TODO: ADD DELETE FUNCTIONALITY TO $DELETEBTN WITH EVENT LISTENER HERE
+    // TODO: ADD DELETE FUNCTIONALITY TO $DELETEBTN WITH EVENT LISTENER HERE $deleteBtn ID : deleteBtn
     
+     // TODO: ADD EDIT BUTTON FUNCTIONALITY HERE  $editBtn ID: editBtn
  };
  
 
@@ -166,8 +167,9 @@ async function renderPastEntries() {
     $pastEntriesContainer.appendChild($pastEntryCard)
 
     }
-    // ADD DELETE PAST ENTRIES BUTTON HERE WITH EVENT LISTENERS
-  
+    // TODO:ADD DELETE PAST ENTRIES BUTTON HERE WITH EVENT LISTENERS $deleteBtn ID: deleteBtn-${data[i].id}
+    // TODO: ADD EDIT BUTTON FUNCTIONALITY HERE $editBtn ID: editBtn-${data[i].id}
+  //DELETE BUTTON IS CALLED $   
     $newEntriesContainer.insertAdjacentElement('afterend', $pastEntriesContainer);
 }
 renderNewestEntry()
