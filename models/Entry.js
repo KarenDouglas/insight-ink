@@ -28,7 +28,7 @@ Entry.init(
       allowNull: false,
       defaultValue: DataTypes.NOW,
     },
-    user_id: DataTypes.INTEGER,
+    user_id: DataTypes.STRING,
     references: {
         model: user,
         key: id,
