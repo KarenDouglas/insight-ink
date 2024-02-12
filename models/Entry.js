@@ -29,8 +29,8 @@ Entry.init(
     },
     user_id: DataTypes.INTEGER,
     references: {
-        model: user,
-        key: id,
+        model: 'user',
+        key: 'id',
     },
   },
 

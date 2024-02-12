@@ -1,4 +1,6 @@
 const {Model, DataTypes} = require ('sequelize');
+const sequelize = require('../config/connection');
+
 
 class Habit extends Model {
 }
@@ -40,5 +42,13 @@ Habit.init(
         }
 
 
+    }, {
+        sequelize,
+    timestamps: false,
+    freezeTableName: true,
+    underscored: true,
+    modelName: 'habit',
     }
 )
+
+module.exports = Habit
