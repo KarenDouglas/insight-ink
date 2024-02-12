@@ -14,9 +14,9 @@ router.post('/', async (req, res) => {
         user_id: req.session.user_id,
       });
   
-      res.status(200).json(newHabit);
+     return res.status(200).json(newHabit);
     } catch (err) {
-      res.status(400).json(err);
+      return res.status(400).json(err);
     }
   });
 
@@ -27,7 +27,22 @@ router.post('/', async (req, res) => {
 // client side request is made to UPDATE the habit streak
 // this request will add +1 to the streak count whenever the user completes the habit a second time and update this habit on the habits table
 // it will then be sent back to the client side to display the updated view
-router.put()
+router.put('/:id', async (req,res)=>{
+  try{
+    const habit = await Habit.update({
+      where: {
+
+      },
+    });
+
+    if (!habit){
+     return res.status(400).json({message: 'no habit found with this id'})
+    }
+  }
+  catch (err){
+    return res.status(500).json(err);
+  }
+})
 
 
 
@@ -46,13 +61,12 @@ router.delete('/:id', async (req, res) => {
       });
   
       if (!habitData) {
-        res.status(404).json({ message: 'No habit found with this id!' });
-        return;
+       return res.status(404).json({ message: 'No habit found with this id!' });
       }
   
-      res.status(200).json(habitData);
+      return res.status(200).json(habitData);
     } catch (err) {
-      res.status(500).json(err);
+       return res.status(500).json(err);
     }
   });
   
