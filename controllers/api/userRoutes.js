@@ -3,6 +3,7 @@ const { User } = require('../../models');
 
 
 // Routes GET/POST LOGIN/POST LOGOUT/ POST Register
+
 // Create a new User
 router.post('/', async (req, res) => {
     try{
@@ -38,7 +39,7 @@ router.post('/login', async (req, res) => {
             });
             return;
         } 
-        
+
         const validPassword = await userLogin.checkPassword(req.body.password);
         
         if (!validPassword) {  
@@ -74,7 +75,32 @@ router.post('/logout', async (req, res) => {
 // Create register route
 router.post('/register', async (req, res) => {
     try {
-        const userRegister = await User.findOne
+        const existingUser = await User.findOne({
+            where: {
+                username: req.body.username,
+            }
+        });
+
+        if (existingUser) {
+            res.status(400).json({
+                message: 'Username already exists. Please choose a different username.'
+            });
+            return;
+        }
+
+        const newUser = await User.create(req.body);
+
+        req.session.save(() => {
+            req.session.user_id = newUser.id;
+            req.session.logged_in = true;
+            res.status(200).json(newUser);
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(400).json({ 
+            error: 'New user could not be registered.', details: err.message 
+        });
     }
-})
+});
+
 module.exports = router;
