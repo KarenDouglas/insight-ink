@@ -71,4 +71,10 @@ router.post('/logout', async (req, res) => {
     }
 });
 
+// Create register route
+router.post('/register', async (req, res) => {
+    try {
+        const userRegister = await User.findOne
+    }
+})
 module.exports = router;
