@@ -28,11 +28,13 @@ Entry.init(
       allowNull: false,
       defaultValue: DataTypes.NOW,
     },
-    user_id: DataTypes.STRING,
+    user_id: { 
+      type: DataTypes.INTEGER,
     references: {
-        model: user,
-        key: id,
+        model: 'user',
+        key: 'id',
     },
+  },
   },
 
   {
@@ -41,9 +43,9 @@ Entry.init(
     freezeTableName: true,
     underscored: true,
     modelName: 'entry',
-  }
+  },
 
-  
+
 );
 
 module.exports = Entry;
