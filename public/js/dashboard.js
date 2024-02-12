@@ -2,7 +2,7 @@ const $newEntriesContainer = document.querySelector('#newEntryContainer')
 
 
 let dummyData = [
-    {   
+    {
         id: 1,
         title: 'here is a title',
         mood: 'angry',
@@ -80,19 +80,19 @@ data = dummyData
 console.log(data)
 
 // renders the latest entry prominent on page
-async function renderNewestEntry(){
+async function renderNewestEntry() {
     //Delete and Edit Button in DOM
     const $deleteBtn = document.createElement('button')
     const $editBtn = document.createElement('button')
-    $deleteBtn.innerHTML= 'delete'
-    $editBtn.innerHTML= 'edit'
+    $deleteBtn.innerHTML = 'delete'
+    $editBtn.innerHTML = 'edit'
     $deleteBtn.id = 'deleteBtn'
     $editBtn.id = 'editBtn'
 
     let newEntry = data[data.length - 1];
 
 
-    
+
     // Rendering habits list
     const renderHabitsList = () => {
         const $habitsListUl = document.createElement('ul');
@@ -102,12 +102,12 @@ async function renderNewestEntry(){
             $habitListItem.textContent = newEntry.habits[i];
             $habitsListUl.appendChild($habitListItem);
         }
- 
+
         return $habitsListUl;
     };
     // this is the ul to be appended to entry
     const habitList = renderHabitsList();
- 
+
     // Render entry container
     const $entryContainer = document.createElement('section');
     $entryContainer.id = 'entryContainer';
@@ -118,12 +118,12 @@ async function renderNewestEntry(){
     `;
     // Append habits list to entry container
     $entryContainer.appendChild(habitList);
- 
+
     // Add entry text
     const $entryText = document.createElement('p');
     $entryText.textContent = newEntry.entry;
     $entryContainer.appendChild($entryText);
- 
+
     // Append entry container to the main container
     $newEntriesContainer.appendChild($entryContainer);
     $newEntriesContainer.appendChild($deleteBtn)
@@ -132,9 +132,9 @@ async function renderNewestEntry(){
 
 
     // TODO: ADD DELETE FUNCTIONALITY TO $DELETEBTN WITH EVENT LISTENER HERE $deleteBtn ID : deleteBtn
-    
-     // TODO: ADD EDIT BUTTON FUNCTIONALITY HERE  $editBtn ID: editBtn
-     const handleEditEntry = (entryId) => {
+
+    // TODO: ADD EDIT BUTTON FUNCTIONALITY HERE  $editBtn ID: editBtn
+    const handleEditEntry = (entryId) => {
 
         const editEntry = data.find(entry => entry.id === entryId);
 
@@ -145,41 +145,70 @@ async function renderNewestEntry(){
             $titleInput.type = 'text';
             $titleInput.value = editEntry.title;
             $editForm.appendChild($titleInput);
-            
+
             const $entryInput = document.createElement('textarea');
+            $entryInput.value = editEntry.entry;
+            $editForm.appendChild($entryInput);
 
+            // Habits checkbox
             const $habitCheckboxes = document.createElement('div');
-            
+            entryToEdit.habits.forEach(habit => {
+                const $checkbox = document.createElement('input');
+                $checkbox.type = 'checkbox';
+                $checkbox.value = habit;
+                $checkbox.checked = entryToEdit.habits.includes(habit);
+                const $label = document.createElement('label');
+                $label.textContent = habit;
+
+                $habitCheckboxes.appendChild($checkbox);
+                $habitCheckboxes.appendChild($label);
+            });
+            $editForm.appendChild($habitCheckboxes);
+
             const $moodSelect = document.createElement('select');
-        }
+            const $moodOptions = [ 
+                'happy',
+                'angry',
+                'calm',
+                'anxious',
+                'excited'
+            ];
+            $moodOptions.forEach(option => {
+                const $option = document.createElement('input');
+                $option.value = 'option';
+                $option.textContent = option;
+                $option.appendChild($moodSelect);
+                
+            })
+        } 
 
-     }
+    }
 
-     $editBtn.addEventListener('click', () => {
+    $editBtn.addEventListener('click', () => {
         handleEditEntry(newEntry.id);
-     });
+    });
 };
- 
+
 
 
 const $pastEntriesContainer = document.createElement('section');
 $pastEntriesContainer.id = 'pastEntriesContainer';
 async function renderPastEntries() {
     let $deleteBtn = ''
-    $pastEntriesContainer.innerHTML= ''
-    for(let i = 0; i< data.length-1; i++){
-     $deleteBtn = document.createElement('button')
-    const $editBtn = document.createElement('button')
-    const $pastEntryCard = document.createElement('section')
-    $deleteBtn.innerHTML= 'delete'
-    $editBtn.innerHTML= 'edit'
-    $deleteBtn.id = `deleteBtn-${data[i].id}`
-    $editBtn.id = `editBtn-${data[i].id}`
+    $pastEntriesContainer.innerHTML = ''
+    for (let i = 0; i < data.length - 1; i++) {
+        $deleteBtn = document.createElement('button')
+        const $editBtn = document.createElement('button')
+        const $pastEntryCard = document.createElement('section')
+        $deleteBtn.innerHTML = 'delete'
+        $editBtn.innerHTML = 'edit'
+        $deleteBtn.id = `deleteBtn-${data[i].id}`
+        $editBtn.id = `editBtn-${data[i].id}`
         const sentences = data[i].entry.split(/\. |\? |! /);
 
         const firstTwoSentences = sentences.slice(0, 2);
-        $pastEntryCard.id= data[i].id
-        $pastEntryCard.innerHTML+=`
+        $pastEntryCard.id = data[i].id
+        $pastEntryCard.innerHTML += `
         <section id=>
         <h2>${data[i].title}</h2>
         <p>${data[i].mood}</p>
@@ -189,13 +218,13 @@ async function renderPastEntries() {
 
         $pastEntryCard.appendChild($deleteBtn)
         $pastEntryCard.appendChild($editBtn)
-    $pastEntriesContainer.appendChild($pastEntryCard)
+        $pastEntriesContainer.appendChild($pastEntryCard)
 
     }
     // TODO:ADD DELETE PAST ENTRIES BUTTON HERE WITH EVENT LISTENERS $deleteBtn ID: deleteBtn-${data[i].id}
     // TODO: ADD EDIT BUTTON FUNCTIONALITY HERE $editBtn ID: editBtn-${data[i].id}
 
-  //DELETE BUTTON IS CALLED $   
+    //DELETE BUTTON IS CALLED $   
     $newEntriesContainer.insertAdjacentElement('afterend', $pastEntriesContainer);
 }
 renderNewestEntry()
