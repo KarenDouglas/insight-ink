@@ -1,4 +1,4 @@
- const  {Entry} = require('../models/Entry')
+ const  Entry = require('../models/Entry')
 
 const entries = [
     {
@@ -16,4 +16,4 @@ const entries = [
    
   ];
   const seedEntries = () => Entry.bulkCreate(entries);
-  module.exports = { seedEntries };
+  module.exports =  seedEntries ;

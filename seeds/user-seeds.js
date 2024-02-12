@@ -1,3 +1,4 @@
+const User = require('../models/User')
 const users = [
     {
       username: 'john_doe',
@@ -7,7 +8,7 @@ const users = [
       username: 'jane_smith',
       password: 'password456',
     },
-    // Add more users as needed
+
   ];
-  const seedUsers = () => Entry.bulkCreate(users);
-  module.exports = { seedUsers };
+  const seedUsers = async() => await User.bulkCreate(users);
+  module.exports =  seedUsers 
