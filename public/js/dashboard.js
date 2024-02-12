@@ -177,9 +177,10 @@ async function renderNewestEntry() {
                 const $option = document.createElement('input');
                 $option.value = 'option';
                 $option.textContent = option;
-                $option.appendChild($moodSelect);
-                
-            })
+                $moodSelect.appendChild($option);
+            });
+            $editForm.appendChild($moodSelect);
+            $moodSelect.value = $moodOptions.mood;
         } 
 
     }
