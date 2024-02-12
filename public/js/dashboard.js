@@ -172,6 +172,13 @@ async function renderPastEntries() {
 
     }
     // TODO:ADD DELETE PAST ENTRIES BUTTON HERE WITH EVENT LISTENERS $deleteBtn ID: deleteBtn-${data[i].id}
+    $deleteBtn.addEventListener('click', () => {
+        for (entry in $entryContainer) {
+            // Call a function to handle the delete action
+            deleteEntry(entry.id);
+        }
+    });
+    
     // TODO: ADD EDIT BUTTON FUNCTIONALITY HERE $editBtn ID: editBtn-${data[i].id}
   //DELETE BUTTON IS CALLED $   
     $newEntriesContainer.insertAdjacentElement('afterend', $pastEntriesContainer);
