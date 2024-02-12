@@ -16,13 +16,13 @@ User.init(
             primaryKey: true,
             autoIncrement: true,
         },
-        name: {
+        username: {
             type: DataTypes.STRING,
             allowNull: false,
         },
         email: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
             unique: true,
             validate: {
                 isEmail: true,
@@ -35,6 +35,17 @@ User.init(
                 len: [8],
             },
         },
+        created_at: {
+            type: DataTypes.DATE,
+            allowNull: false,
+            defaultValue: DataTypes.NOW,
+        },
+        updated_at: {
+            type: DataTypes.DATE,
+            allowNull: false,
+            defaultValue: DataTypes.NOW,
+        },
+        
     },
     {
         hooks: {

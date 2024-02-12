@@ -1,5 +1,6 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
+const user = require('../models/User')
 
 class Entry extends Model{
 
@@ -27,11 +28,13 @@ Entry.init(
       allowNull: false,
       defaultValue: DataTypes.NOW,
     },
-    user_id: DataTypes.INTEGER,
+    user_id: { 
+      type: DataTypes.INTEGER,
     references: {
         model: 'user',
         key: 'id',
     },
+  },
   },
 
   {
@@ -40,9 +43,9 @@ Entry.init(
     freezeTableName: true,
     underscored: true,
     modelName: 'entry',
-  }
+  },
 
-  
+
 );
 
 module.exports = Entry;
