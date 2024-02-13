@@ -1,3 +1,4 @@
+const Habit = require('../models/Habit')
 const habits = [
     {
       user_id: 1,
@@ -10,3 +11,6 @@ const habits = [
       streak: 10,
     },
   ];
+
+  const seedHabits = () => Habit.bulkCreate(habits);
+  module.exports =  seedHabits ;
