@@ -149,30 +149,26 @@ async function renderNewestEntry(){
     $deleteBtn.addEventListener('click', deleteEntry);
 
     // TODO: ADD EDIT BUTTON FUNCTIONALITY HERE  $editBtn ID: editBtn 
-    const $editEntriesContainer = document.createElement('section')
-    $editEntriesContainer.id = 'pastEntriesContainer'
+    const $editEntriesContainer = document.createElement('section');
+    $editEntriesContainer.id = 'pastEntriesContainer';
 
     const handleEditEntry = async (entryId) => {
-        
+        const $editEntriesContainer = document.getElementById('pastEntriesContainer');
         $editEntriesContainer.innerHTML = '';
         try {
-            const $entryContainer = document.getElementById(entryId);
-            if (!$entryContainer) {
-                console.error(`Entry container with an ID of ${entryId} cannot be found.`);
-                return;
+            const response = await fetch(`/api/entry/${entryId}`);
+            if (!response.ok) {
+                throw new Error(`Failed to fetch entry with ID ${entryId}`);
             }
 
-                const title = $entryContainer.querySelector('h2').textContent;
-                const mood = $entryContainer.querySelector('p').textContent;
-                const habits = Array.from($entryContainer.querySelectorAll('ul li')).map(item => item.textContent);
-                const editEntry = $entryContainer.querySelector('section p:last-child').textContent;
+                const editEntry = await response.json();
 
                 const $title = document.createElement('h2');
-                $title.textContent = title;
+                $title.textContent = editEntry.title;
                 const $mood = document.createElement('p');
-                $mood.textContent = mood;
+                $mood.textContent = editEntry.mood;
                 const $habitsCheckbox = document.createElement('ul');
-                habits.forEach(habit => {
+                editEntry.habits.forEach(habit => {
                     const $habitsCheckboxItem = document.createElement('li');
                     $habitsCheckboxItem.textContent = habit;
                     $habitsCheckbox.appendChild($habitsCheckboxItem);
@@ -180,7 +176,7 @@ async function renderNewestEntry(){
                 const $habitsHeader = document.createElement('h3');
                 $habitsHeader.textContent = 'Habits: ';
                 const $entryText = document.createElement('p');
-                $entryText.textContent = editEntry;
+                $entryText.textContent = editEntry.entry;
 
                 $editEntriesContainer.appendChild($title);
                 $editEntriesContainer.appendChild($mood);
@@ -193,10 +189,15 @@ async function renderNewestEntry(){
         }
     };
     
-    $editBtn.addEventListener('click', () => {
+    $editBtn.addEventListener('click', async () => {
         const entryId = window.location.pathname.split('/').pop();
-        handleEditEntry(entryId);
-        console.log('it works!')
+
+        try {
+            await handleEditEntry(entryId);
+            console.log('It working')
+        } catch (error) {
+            console.error(error);
+        }
     });
 };
 
