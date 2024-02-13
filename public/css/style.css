@@ -1,0 +1,59 @@
+body {
+    background-color: lightblue;
+    
+    
+}
+
+section {
+    background-color: lightpink;
+    margin-top: 80px;
+    height: 450px;
+}
+footer {
+    margin-top: 90px;
+    color: white;
+
+}
+input {
+    margin: 15px;
+    padding: 15px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    margin-top: 15px;
+   
+    
+}
+div {
+    margin-left: 10px;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 15px;
+    /* text-align: center; */
+    
+}
+
+button {
+    margin: 15px;
+    margin-top: 15px;
+    margin-left: 15px;
+    width: 100px;
+    padding-bottom: 25px;
+    margin-top: 15px;
+  
+
+    
+}
+label {
+    padding-right: 15px;
+    padding-left: 20px;
+    
+    
+
+}
+
+form {
+    height: 300px;
+}
+
+nav {
+    align-items: center;
+}
