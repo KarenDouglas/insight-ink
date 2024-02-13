@@ -1,3 +1,4 @@
+
 const $newEntriesContainer = document.querySelector('#newEntryContainer')
 
 
@@ -75,12 +76,15 @@ let dummyData = [
         entry: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus aliquam omnis porro, ad tempore earum deserunt eligendi voluptatem architecto alias sint sunt placeat et, ipsa debitis vitae veniam, repudiandae commodi. Repellendus blanditiis eveniet, dicta sequi facilis minima saepe libero fugiat! Error, cupiditate? Impedit atque eveniet labore expedita eos illum fugit fuga consequuntur nisi, est culpa quos, ex delectus repudiandae sint? Voluptatum cumque corporis hic cupiditate, excepturi, nulla perferendis ab doloribus officia error vitae fuga dolorum deleniti quaerat maiores optio velit obcaec'
     }
 ]
-data = dummyData
+let data = dummyData
+
+
 
 console.log(data)
 
 // renders the latest entry prominent on page
-async function renderNewestEntry() {
+async function renderNewestEntry(){
+console.log('you made it to this page')
     //Delete and Edit Button in DOM
     const $deleteBtn = document.createElement('button')
     const $editBtn = document.createElement('button')
@@ -132,6 +136,25 @@ async function renderNewestEntry() {
 
 
     // TODO: ADD DELETE FUNCTIONALITY TO $DELETEBTN WITH EVENT LISTENER HERE $deleteBtn ID : deleteBtn
+    const deleteEntry = async(e) => {
+        if(e.target.id === 'deleteBtn'){
+            $newEntriesContainer.removeChild($entryContainer)
+            $newEntriesContainer.removeChild($deleteBtn)
+            $newEntriesContainer.removeChild($editBtn)
+           data.pop()
+           renderNewestEntry()
+           renderPastEntries()
+           console.log(data)
+        }
+    }
+    deleteBtn.addEventListener('click',deleteEntry)
+     // TODO: ADD EDIT BUTTON FUNCTIONALITY HERE  $editBtn ID: editBtn
+ };
+ 
+
+
+ const $pastEntriesContainer = document.createElement('section')
+ $pastEntriesContainer.id = 'pastEntriesContainer'
     const handleEditEntry = (entryId) => {
         const editEntry = data.find(entry => entry.id === entryId);
 
@@ -273,6 +296,22 @@ async function renderPastEntries() {
 
     }
     // TODO:ADD DELETE PAST ENTRIES BUTTON HERE WITH EVENT LISTENERS $deleteBtn ID: deleteBtn-${data[i].id}
+    const deletePastEntry2 = (e) => {
+        if(e.target.id.includes('deleteBtn')){
+            let filteredList;
+            const btnId = parseInt(e.target.id.split('deleteBtn-')[1])
+            for(let i = 0; i < data.length -1; i++){
+                if(btnId === data[i].id){
+                 data =  data.filter((el)=>btnId !== el.id  )
+                 renderPastEntries()
+                }
+            }
+            console.log(data)
+            return filteredList
+        }
+     }
+     $pastEntriesContainer.addEventListener('click', deletePastEntry2)
+    
     // TODO: ADD EDIT BUTTON FUNCTIONALITY HERE $editBtn ID: editBtn-${data[i].id}
 
     //DELETE BUTTON IS CALLED $   
