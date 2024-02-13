@@ -1,11 +1,10 @@
-const {Model, DataTypes} = require ('sequelize');
+const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-
-class Habit extends Model {
-}
+class Habit extends Model {}
 
 Habit.init(
+
     {
         id: {
             type: DataTypes.INTEGER,
@@ -26,11 +25,11 @@ Habit.init(
 
         created_At: {
             type: DataTypes.DATE,
-            allowNull: false
+            allowNull: true
         },
         updated_At: {
             type: DataTypes.DATE,
-            allowNull: false
+            allowNull: true
         },
         user_id: {
             type: DataTypes.INTEGER,
@@ -46,9 +45,10 @@ Habit.init(
         sequelize,
     timestamps: false,
     freezeTableName: true,
-    underscored: true,
-    modelName: 'habit',
-    }
-)
+    underscored: false,
 
-module.exports = Habit
+    modelName: 'habit',
+  }
+);
+
+module.exports = Habit;
