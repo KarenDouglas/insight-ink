@@ -79,10 +79,10 @@ let dummyData = [
 let data = dummyData
 
 
-
 // renders the latest entry prominent on page
 async function renderNewestEntry(){
-console.log('you made it to this page')
+    data = await getData()
+    
     //Delete and Edit Button in DOM
     const $deleteBtn = document.createElement('button')
     const $editBtn = document.createElement('button')
@@ -93,7 +93,7 @@ console.log('you made it to this page')
 
     let newEntry = data[data.length - 1];
 
-    
+    console.log(newEntry)
     // Rendering habits list
     const renderHabitsList = () => {
         const $habitsListUl = document.createElement('ul');
