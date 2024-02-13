@@ -1,8 +1,8 @@
 
 
 <body>
+  <button type="button" class="btn btn-light">+ HABIT</button>
     {{#each habits as |habit|}}
-    
     <div class="card" style="width: 18rem;">
       <i class="fa-regular fa-square-minus"></i>
   <div class="card-body">
@@ -12,4 +12,5 @@
  <p>{{habit.streak}}</p>
 </div>
 {{/each}}
+<script src="/js/habits.js"></script>
 </body>
