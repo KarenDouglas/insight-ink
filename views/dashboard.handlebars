@@ -1,5 +1,22 @@
 <body>
-      <section id="newEntryContainer"></section>
+
+ <section id="newEntryContainer">
+            {{#each entries as |entry|}}
+            <section id={{entry.id}}>
+                  <button id="deleteBtn-{{entry.id}}">delete</button>
+                  <button id="editBtn-{{entry.id}}">edit</button>
+            </section>
+            <section >
+                  <h2>{{entry.title}}</h2>
+                  <p>{{entry.mood}}</p>
+                  {{#each entry.habits as |habit|}}
+                  <p>{{habit.habit_name}}</p>
+                  {{/each}}
+                  <p>{{entry.description}}</p>
+            </section>
+            {{/each}}
+      </section>
+
 
 <!-- Modal Structure -->
     <div id="entryModal" class="modal"></div>
@@ -17,6 +34,9 @@
 
 
 
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>       
-    <script src="/public/js/dashboard.js"></script>
+          
+     
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+      <script src="/js/dashboard.js"></script>
 </body>

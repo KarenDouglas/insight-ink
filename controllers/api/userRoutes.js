@@ -15,7 +15,7 @@ router.post('/', async (req, res) => {
         
         res.status(200).json(newUser);
         });
-
+      
     } catch (err) {
         console.error(err);
 
@@ -31,7 +31,7 @@ router.post('/login', async (req, res) => {
                 username: req.body.username,
             },
         });
-
+        console.log(req.session)
         if (!userLogin) {
             console.log(error);
             res.status(400).json({

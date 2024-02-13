@@ -1,3 +1,4 @@
+
 const $newEntriesContainer = document.querySelector('#newEntryContainer')
 
 
@@ -77,9 +78,11 @@ let dummyData = [
 ]
 let data = dummyData
 
-console.log(data)
+
 // renders the latest entry prominent on page
 async function renderNewestEntry(){
+    data = await getData()
+    
     //Delete and Edit Button in DOM
     const $deleteBtn = document.createElement('button')
     const $editBtn = document.createElement('button')
@@ -90,8 +93,7 @@ async function renderNewestEntry(){
 
     let newEntry = data[data.length - 1];
 
-
-    
+    console.log(newEntry)
     // Rendering habits list
     const renderHabitsList = () => {
         const $habitsListUl = document.createElement('ul');
@@ -131,7 +133,18 @@ async function renderNewestEntry(){
 
 
     // TODO: ADD DELETE FUNCTIONALITY TO $DELETEBTN WITH EVENT LISTENER HERE $deleteBtn ID : deleteBtn
-    
+    const deleteEntry = async(e) => {
+        if(e.target.id === 'deleteBtn'){
+            $newEntriesContainer.removeChild($entryContainer)
+            $newEntriesContainer.removeChild($deleteBtn)
+            $newEntriesContainer.removeChild($editBtn)
+           data.pop()
+           renderNewestEntry()
+           renderPastEntries()
+           console.log(data)
+        }
+    }
+    deleteBtn.addEventListener('click',deleteEntry)
      // TODO: ADD EDIT BUTTON FUNCTIONALITY HERE  $editBtn ID: editBtn
  };
  
@@ -168,7 +181,21 @@ async function renderPastEntries() {
 
     }
     // TODO:ADD DELETE PAST ENTRIES BUTTON HERE WITH EVENT LISTENERS $deleteBtn ID: deleteBtn-${data[i].id}
-    
+    const deletePastEntry2 = (e) => {
+        if(e.target.id.includes('deleteBtn')){
+            let filteredList;
+            const btnId = parseInt(e.target.id.split('deleteBtn-')[1])
+            for(let i = 0; i < data.length -1; i++){
+                if(btnId === data[i].id){
+                 data =  data.filter((el)=>btnId !== el.id  )
+                 renderPastEntries()
+                }
+            }
+            console.log(data)
+            return filteredList
+        }
+     }
+     $pastEntriesContainer.addEventListener('click', deletePastEntry2)
     
     // TODO: ADD EDIT BUTTON FUNCTIONALITY HERE $editBtn ID: editBtn-${data[i].id}
   //DELETE BUTTON IS CALLED $   
