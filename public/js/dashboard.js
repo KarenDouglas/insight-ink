@@ -132,63 +132,113 @@ async function renderNewestEntry() {
 
 
     // TODO: ADD DELETE FUNCTIONALITY TO $DELETEBTN WITH EVENT LISTENER HERE $deleteBtn ID : deleteBtn
-
-    // TODO: ADD EDIT BUTTON FUNCTIONALITY HERE  $editBtn ID: editBtn
     const handleEditEntry = (entryId) => {
-
         const editEntry = data.find(entry => entry.id === entryId);
 
-        if (entryToEdit) {
-            const $editForm = document.createElement('form');
+        if (editEntry) {
+            const $existingEntryContainer = document.getElementById('entryContainer');
 
-            const $titleInput = document.createElement('input');
-            $titleInput.type = 'text';
-            $titleInput.value = editEntry.title;
-            $editForm.appendChild($titleInput);
+            $existingEntryContainer.innerHTML = '';
 
-            const $entryInput = document.createElement('textarea');
-            $entryInput.value = editEntry.entry;
-            $editForm.appendChild($entryInput);
+            const $title = document.createElement('h2');
+            $title.textContent = editEntry.title;
 
-            // Habits checkbox
-            const $habitCheckboxes = document.createElement('div');
-            entryToEdit.habits.forEach(habit => {
-                const $checkbox = document.createElement('input');
-                $checkbox.type = 'checkbox';
-                $checkbox.value = habit;
-                $checkbox.checked = entryToEdit.habits.includes(habit);
-                const $label = document.createElement('label');
-                $label.textContent = habit;
+            const $mood = document.createElement('p');
+            $mood.textContent = editEntry.mood;
 
-                $habitCheckboxes.appendChild($checkbox);
-                $habitCheckboxes.appendChild($label);
+            const $habitsCheckbox = document.createElement('ul');
+            editEntry.habits.forEach(habit => { 
+                const $habitsCheckboxItem = document.createElement('li');
+                $habitsCheckboxItem.textContent = habit;
+                $habitsCheckbox.appendChild($habitListItem);
             });
-            $editForm.appendChild($habitCheckboxes);
+            const $habitsHeader = document.createElement('h3');
+            $habitsHeader.textContent = 'Habits: ';
 
-            const $moodSelect = document.createElement('select');
-            const $moodOptions = [ 
-                'happy',
-                'angry',
-                'calm',
-                'anxious',
-                'excited'
-            ];
-            $moodOptions.forEach(option => {
-                const $option = document.createElement('input');
-                $option.value = 'option';
-                $option.textContent = option;
-                $moodSelect.appendChild($option);
-            });
-            $editForm.appendChild($moodSelect);
-            $moodSelect.value = $moodOptions.mood;
-        } 
+            const $entryText = document.createElement('p');
+            $entryText.textContent = editEntry.entry;
 
-    }
-
-    $editBtn.addEventListener('click', () => {
-        handleEditEntry(newEntry.id);
-    });
+            $existingEntryContainer.appendChild($title);
+            $existingEntryContainer.appendChild($mood);
+            $existingEntryContainer.appendChild($habitsHeader);
+            $existingEntryContainer.appendChild($habitsCheckbox);
+            $existingEntryContainer.appendChild($entryText);
+        }
+    };
 };
+    // TODO: ADD EDIT BUTTON FUNCTIONALITY HERE  $editBtn ID: editBtn
+//     const handleEditEntry = (entryId) => {
+//         // find form by entry id
+//         const editEntry = data.find(entry => entry.id === entryId);
+
+//         if (editEntry) {
+//             //create form to edit
+//             const $editForm = document.createElement('form');
+//             // title input, created el, type, and value to represent the title, appended to 'input'; repeated general process. 
+//             const $titleInput = document.createElement('input');
+//             $titleInput.type = 'text';
+//             $titleInput.value = editEntry.title;
+//             $editForm.appendChild($titleInput);
+//             // entry box
+//             const $entryInput = document.createElement('textarea');
+//             $entryInput.value = editEntry.entry;
+//             $editForm.appendChild($entryInput);
+
+//             // Habits checkbox
+//             const $habitCheckboxes = document.createElement('div');
+//             editEntry.habits.forEach(habit => {
+//                 const $checkbox = document.createElement('input');
+//                 $checkbox.type = 'checkbox';
+//                 $checkbox.value = habit;
+//                 $checkbox.checked = editEntry.habits.includes(habit);
+//                 const $label = document.createElement('label');
+//                 $label.textContent = habit;
+
+//                 $habitCheckboxes.appendChild($checkbox);
+//                 $habitCheckboxes.appendChild($label);
+//             });
+//             $editForm.appendChild($habitCheckboxes);
+//             // mood
+//             const $moodSelect = document.createElement('select');
+//             const $moodOptions = [ 
+//                 'happy',
+//                 'angry',
+//                 'calm',
+//                 'anxious',
+//                 'excited'
+//             ];
+//             $moodOptions.forEach(option => {
+//                 const $option = document.createElement('input');
+//                 $option.value = 'option';
+//                 $option.textContent = option;
+//                 $moodSelect.appendChild($option);
+//             });
+//             $editForm.appendChild($moodSelect);
+//             $moodSelect.value = $moodOptions.mood;
+            
+//             // submit button
+//             const $submitButton = document.createElement('button');
+//             $submitButton.type = 'submit';
+//             $submitButton.value = 'Save Changes';
+//             $submitButton.addEventListener('click', () => {
+//                 editEntry.title = $titleInput.value;
+//                 editEntry.entry = $entryInput.value;
+//                 editEntry.mood = $moodSelect.value;
+//                 editEntry.habits = [...$habitCheckboxes.querySelectorAll('input:checked')].map(checkbox => checkbox.value);
+
+//                 $editForm.remove();
+//             });
+//             $editForm.appendChild($submitButton);
+
+//             $newEntriesContainer.appendChild($editForm);
+//         } 
+
+//     }
+
+//     $editBtn.addEventListener('click', () => {
+//         handleEditEntry();
+//     });
+// };
 
 
 
