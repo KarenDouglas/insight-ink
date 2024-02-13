@@ -83,8 +83,8 @@ let data = dummyData
 console.log(data)
 
 // renders the latest entry prominent on page
-async function renderNewestEntry(){
-console.log('you made it to this page')
+async function renderNewestEntry() {
+    console.log('you made it to this page')
     //Delete and Edit Button in DOM
     const $deleteBtn = document.createElement('button')
     const $editBtn = document.createElement('button')
@@ -133,133 +133,70 @@ console.log('you made it to this page')
     $newEntriesContainer.appendChild($deleteBtn)
     $newEntriesContainer.appendChild($editBtn)
     //eventListeners and relevant functions
- 
+
 
     // TODO: ADD DELETE FUNCTIONALITY TO $DELETEBTN WITH EVENT LISTENER HERE $deleteBtn ID : deleteBtn
-    const deleteEntry = async(e) => {
-        if(e.target.id === 'deleteBtn'){
+    const deleteEntry = async (e) => {
+        if (e.target.id === 'deleteBtn') {
             $newEntriesContainer.removeChild($entryContainer)
             $newEntriesContainer.removeChild($deleteBtn)
             $newEntriesContainer.removeChild($editBtn)
-           data.pop()
-           renderNewestEntry()
-           renderPastEntries()
-           console.log(data)
+            data.pop()
+            renderNewestEntry()
+            renderPastEntries()
+            console.log(data)
         }
     }
-    deleteBtn.addEventListener('click',deleteEntry)
-     // TODO: ADD EDIT BUTTON FUNCTIONALITY HERE  $editBtn ID: editBtn
-};
- 
+    $deleteBtn.addEventListener('click', deleteEntry);
 
+    // TODO: ADD EDIT BUTTON FUNCTIONALITY HERE  $editBtn ID: editBtn 
+    const $editEntriesContainer = document.createElement('section')
+    $editEntriesContainer.id = 'pastEntriesContainer'
 
- const $pastEntriesContainer = document.createElement('section')
- $pastEntriesContainer.id = 'pastEntriesContainer'
-    const handleEditEntry = (entryId) => {
-        const editEntry = data.find(entry => entry.id === entryId);
+    const handleEditEntry = async (entryId) => {
+        const $editEntriesContainer = document.getElementById('pastEntriesContainer');
+        $editEntriesContainer.innerHTML = '';
+        try {
+            const response = await fetch(`/api/entry/${entryId}`);
+            if (!response.ok) {
+                throw new Error(`Failed to fetch entry with ID ${entryId}`);
+            }
 
-        if (editEntry) {
-            const $existingEntryContainer = document.getElementById('entryContainer');
+                const editEntry = await response.json();
 
-            $existingEntryContainer.innerHTML = '';
+                const $title = document.createElement('h2');
+                $title.textContent = editEntry.title;
 
-            const $title = document.createElement('h2');
-            $title.textContent = editEntry.title;
+                const $mood = document.createElement('p');
+                $mood.textContent = editEntry.mood;
 
-            const $mood = document.createElement('p');
-            $mood.textContent = editEntry.mood;
+                const $habitsCheckbox = document.createElement('ul');
+                editEntry.habits.forEach(habit => {
+                    const $habitsCheckboxItem = document.createElement('li');
+                    $habitsCheckboxItem.textContent = habit;
+                    $habitsCheckbox.appendChild($habitsCheckboxItem);
+                });
+                const $habitsHeader = document.createElement('h3');
+                $habitsHeader.textContent = 'Habits: ';
 
-            const $habitsCheckbox = document.createElement('ul');
-            editEntry.habits.forEach(habit => { 
-                const $habitsCheckboxItem = document.createElement('li');
-                $habitsCheckboxItem.textContent = habit;
-                $habitsCheckbox.appendChild($habitListItem);
-            });
-            const $habitsHeader = document.createElement('h3');
-            $habitsHeader.textContent = 'Habits: ';
+                const $entryText = document.createElement('p');
+                $entryText.textContent = editEntry.entry;
 
-            const $entryText = document.createElement('p');
-            $entryText.textContent = editEntry.entry;
-
-            $existingEntryContainer.appendChild($title);
-            $existingEntryContainer.appendChild($mood);
-            $existingEntryContainer.appendChild($habitsHeader);
-            $existingEntryContainer.appendChild($habitsCheckbox);
-            $existingEntryContainer.appendChild($entryText);
+                $editEntriesContainer.appendChild($title);
+                $editEntriesContainer.appendChild($mood);
+                $editEntriesContainer.appendChild($habitsHeader);
+                $editEntriesContainer.appendChild($habitsCheckbox);
+                $editEntriesContainer.appendChild($entryText);
+            
+        } catch (error) {
+            console.error(error);
         }
     };
-
-    // TODO: ADD EDIT BUTTON FUNCTIONALITY HERE  $editBtn ID: editBtn
-    const handleEditEntry = (entryId) => {
-        // find form by entry id
-        const editEntry = data.find(entry => entry.id === entryId);
-
-        if (editEntry) {
-            //create form to edit
-            const $editForm = document.createElement('form');
-            // title input, created el, type, and value to represent the title, appended to 'input'; repeated general process. 
-            const $titleInput = document.createElement('input');
-            $titleInput.type = 'text';
-            $titleInput.value = editEntry.title;
-            $editForm.appendChild($titleInput);
-            // entry box
-            const $entryInput = document.createElement('textarea');
-            $entryInput.value = editEntry.entry;
-            $editForm.appendChild($entryInput);
-
-            // Habits checkbox
-            const $habitCheckboxes = document.createElement('div');
-            editEntry.habits.forEach(habit => {
-                const $checkbox = document.createElement('input');
-                $checkbox.type = 'checkbox';
-                $checkbox.value = habit;
-                $checkbox.checked = editEntry.habits.includes(habit);
-                const $label = document.createElement('label');
-                $label.textContent = habit;
-
-                $habitCheckboxes.appendChild($checkbox);
-                $habitCheckboxes.appendChild($label);
-            });
-            $editForm.appendChild($habitCheckboxes);
-            // mood
-            const $moodSelect = document.createElement('select');
-            const $moodOptions = [ 
-                'happy',
-                'angry',
-                'calm',
-                'anxious',
-                'excited'
-            ];
-            $moodOptions.forEach(option => {
-                const $option = document.createElement('input');
-                $option.value = 'option';
-                $option.textContent = option;
-                $moodSelect.appendChild($option);
-            });
-            $editForm.appendChild($moodSelect);
-            $moodSelect.value = $moodOptions.mood;
-            
-            // submit button
-            const $submitButton = document.createElement('button');
-            $submitButton.type = 'submit';
-            $submitButton.value = 'Save Changes';
-            $submitButton.addEventListener('click', () => {
-                editEntry.title = $titleInput.value;
-                editEntry.entry = $entryInput.value;
-                editEntry.mood = $moodSelect.value;
-                editEntry.habits = [...$habitCheckboxes.querySelectorAll('input:checked')].map(checkbox => checkbox.value);
-
-                $editForm.remove();
-            });
-            $editForm.appendChild($submitButton);
-
-            $newEntriesContainer.appendChild($editForm);
-        } 
-
-    }
-
+    
     $editBtn.addEventListener('click', () => {
-        handleEditEntry();
+        const entryId = window.location.pathname.split('/').pop();
+        handleEditEntry(entryId);
+        console.log('it works!')
     });
 };
 
@@ -297,21 +234,21 @@ async function renderPastEntries() {
     }
     // TODO:ADD DELETE PAST ENTRIES BUTTON HERE WITH EVENT LISTENERS $deleteBtn ID: deleteBtn-${data[i].id}
     const deletePastEntry2 = (e) => {
-        if(e.target.id.includes('deleteBtn')){
+        if (e.target.id.includes('deleteBtn')) {
             let filteredList;
             const btnId = parseInt(e.target.id.split('deleteBtn-')[1])
-            for(let i = 0; i < data.length -1; i++){
-                if(btnId === data[i].id){
-                 data =  data.filter((el)=>btnId !== el.id  )
-                 renderPastEntries()
+            for (let i = 0; i < data.length - 1; i++) {
+                if (btnId === data[i].id) {
+                    data = data.filter((el) => btnId !== el.id)
+                    renderPastEntries()
                 }
             }
             console.log(data)
             return filteredList
         }
-     }
-     $pastEntriesContainer.addEventListener('click', deletePastEntry2)
-    
+    }
+    $pastEntriesContainer.addEventListener('click', deletePastEntry2)
+
     // TODO: ADD EDIT BUTTON FUNCTIONALITY HERE $editBtn ID: editBtn-${data[i].id}
 
     //DELETE BUTTON IS CALLED $   
