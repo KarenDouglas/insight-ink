@@ -153,33 +153,34 @@ async function renderNewestEntry(){
     $editEntriesContainer.id = 'pastEntriesContainer'
 
     const handleEditEntry = async (entryId) => {
-        const $editEntriesContainer = document.getElementById('pastEntriesContainer');
+        
         $editEntriesContainer.innerHTML = '';
         try {
-            const response = await fetch(`/api/entry/${entryId}`);
-            if (!response.ok) {
-                throw new Error(`Failed to fetch entry with ID ${entryId}`);
+            const $entryContainer = document.getElementById(entryId);
+            if (!$entryContainer) {
+                console.error(`Entry container with an ID of ${entryId} cannot be found.`);
+                return;
             }
 
-                const editEntry = await response.json();
+                const title = $entryContainer.querySelector('h2').textContent;
+                const mood = $entryContainer.querySelector('p').textContent;
+                const habits = Array.from($entryContainer.querySelectorAll('ul li')).map(item => item.textContent);
+                const editEntry = $entryContainer.querySelector('section p:last-child').textContent;
 
                 const $title = document.createElement('h2');
-                $title.textContent = editEntry.title;
-
+                $title.textContent = title;
                 const $mood = document.createElement('p');
-                $mood.textContent = editEntry.mood;
-
+                $mood.textContent = mood;
                 const $habitsCheckbox = document.createElement('ul');
-                editEntry.habits.forEach(habit => {
+                habits.forEach(habit => {
                     const $habitsCheckboxItem = document.createElement('li');
                     $habitsCheckboxItem.textContent = habit;
                     $habitsCheckbox.appendChild($habitsCheckboxItem);
                 });
                 const $habitsHeader = document.createElement('h3');
                 $habitsHeader.textContent = 'Habits: ';
-
                 const $entryText = document.createElement('p');
-                $entryText.textContent = editEntry.entry;
+                $entryText.textContent = editEntry;
 
                 $editEntriesContainer.appendChild($title);
                 $editEntriesContainer.appendChild($mood);
