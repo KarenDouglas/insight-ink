@@ -131,11 +131,18 @@ async function renderNewestEntry(){
 
 
     // TODO: ADD DELETE FUNCTIONALITY TO $DELETEBTN WITH EVENT LISTENER HERE $deleteBtn ID : deleteBtn
-        $deleteBtn.addEventListener('click', () => {
-            // Call a function to handle the delete action
-            deleteEntry(newEntry.id);
-        });
-    
+    const deleteEntry = async(e) => {
+        if(e.target.id === 'deleteBtn'){
+            $newEntriesContainer.removeChild($entryContainer)
+            $newEntriesContainer.removeChild($deleteBtn)
+            $newEntriesContainer.removeChild($editBtn)
+           data.pop()
+           renderNewestEntry()
+           renderPastEntries()
+           console.log(data)
+        }
+    }
+    deleteBtn.addEventListener('click',deleteEntry)
      // TODO: ADD EDIT BUTTON FUNCTIONALITY HERE  $editBtn ID: editBtn
  };
  
@@ -172,12 +179,21 @@ async function renderPastEntries() {
 
     }
     // TODO:ADD DELETE PAST ENTRIES BUTTON HERE WITH EVENT LISTENERS $deleteBtn ID: deleteBtn-${data[i].id}
-    $deleteBtn.addEventListener('click', () => {
-        for (entry in $entryContainer) {
-            // Call a function to handle the delete action
-            deleteEntry(entry.id);
+    const deletePastEntry2 = (e) => {
+        if(e.target.id.includes('deleteBtn')){
+            let filteredList;
+            const btnId = parseInt(e.target.id.split('deleteBtn-')[1])
+            for(let i = 0; i < data.length -1; i++){
+                if(btnId === data[i].id){
+                 data =  data.filter((el)=>btnId !== el.id  )
+                 renderPastEntries()
+                }
+            }
+            console.log(data)
+            return filteredList
         }
-    });
+     }
+     $pastEntriesContainer.addEventListener('click', deletePastEntry2)
     
     // TODO: ADD EDIT BUTTON FUNCTIONALITY HERE $editBtn ID: editBtn-${data[i].id}
   //DELETE BUTTON IS CALLED $   

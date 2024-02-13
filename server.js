@@ -6,8 +6,6 @@ const routes = require('./controllers');
 const hbs = exphbs.create({});
 
 
-
-
 const sequelize = require('./config/connection');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
@@ -30,8 +28,6 @@ const sess = {
   };
 
 app.use(session(sess));
-console.log("HELLO I AM HERE")
-console.log(sess.cookie)
 
 
 app.use(express.static('public'));
@@ -47,6 +43,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(routes);
 
-sequelize.sync({ force: true }).then(() => {
+sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log('Now listening'));
 });

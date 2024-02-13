@@ -1,12 +1,12 @@
-const express = require('express');
+
 const router = require('express').Router();
 const { Entry, User } = require('../../models');
 
 //This is to get all entries
-router.get('/entries', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const entries = await Entry.findAll({ 
-        include: [{ model: User, attributes: [{user_id}] }]
+       // include: [{ model: User, attributes: [{user_id}] }]
     });
 
     res.status(200).json(entries);
@@ -17,7 +17,7 @@ router.get('/entries', async (req, res) => {
 });
 
 // This gets entry by specific ID 
-router.get('/entries/:id', async (req, res) => {
+router.get('/:id', async (req, res) => {
   try {
     const entry = await Entry.findByPk(req.params.id, {
       include: [{ model: User, attributes: [{id}] }]
@@ -36,7 +36,7 @@ router.get('/entries/:id', async (req, res) => {
 }); 
 
 //This posts a new entry 
-router.post('/entries', async (req, res) => {
+router.post('/newEntry', async (req, res) => {
     try {
       const newEntry = await Entry.create(req.body);
       res.status(200).json(newEntry);
@@ -47,7 +47,7 @@ router.post('/entries', async (req, res) => {
   });
 
   //Edit entry
-  router.put('/entries/:user_id', async (req, res) => {
+  router.put('/:user_id', async (req, res) => {
     try {
         const editEntry = await Entry.edit(req.body, {
             where: {
@@ -67,7 +67,7 @@ router.post('/entries', async (req, res) => {
 });
 
 //This deletes entry by using ID 
-router.delete('/entries/:id', async (req, res) => {
+router.delete('/:id', async (req, res) => {
   try {
     const deletedEntryCount = await Entry.destroy({
       where: {
