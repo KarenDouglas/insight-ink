@@ -26,11 +26,11 @@ Habit.init(
 
         created_At: {
             type: DataTypes.DATE,
-            allowNull: false
+            allowNull: true
         },
         updated_At: {
             type: DataTypes.DATE,
-            allowNull: false
+            allowNull: true
         },
         user_id: {
             type: DataTypes.INTEGER,
@@ -46,7 +46,7 @@ Habit.init(
         sequelize,
     timestamps: false,
     freezeTableName: true,
-    underscored: true,
+    underscored: false,
     modelName: 'habit',
     }
 )

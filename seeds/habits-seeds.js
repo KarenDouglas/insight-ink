@@ -7,7 +7,7 @@ const habits = [
     },
     {
       user_id: 2,
-      habit_namename: 'Meditation',
+      habit_name: 'Meditation',
       streak: 10,
     },
   ];

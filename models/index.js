@@ -7,10 +7,10 @@ const EntryHabit = require('./EntryHabit')
 User.hasMany(Entry);
 Entry.belongsTo(User);
 
-User.hasMany(Habit);
-Habit.belongsTo(User);
+User.hasMany(Habit, {foreignKey: "user_id"});
+Habit.belongsTo(User, {foreignKey: "user_id"});
 
-Entry.belongsToMany(Habit, { through: EntryHabit });
-Habit.belongsToMany(Entry, { through: EntryHabit });
+Entry.belongsToMany(Habit, { through: EntryHabit, foreignKey: "entry_id"});
+Habit.belongsToMany(Entry, { through: EntryHabit,  foreignKey: "habit_id"});
 
-module.exports = {User, Habit, EntryHabit}
+module.exports = {User, Habit, EntryHabit, Entry}

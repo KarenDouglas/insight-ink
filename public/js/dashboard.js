@@ -78,14 +78,6 @@ let dummyData = [
 ]
 let data = dummyData
 
-async function getData(){
-   const response = await fetch('/api/entry')
-   if(response.ok){
-        return response.json()
-   }else{
-    console.error(response)
-   }
-}
 
 // renders the latest entry prominent on page
 async function renderNewestEntry(){
