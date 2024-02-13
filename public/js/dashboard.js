@@ -75,7 +75,7 @@ let dummyData = [
         entry: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus aliquam omnis porro, ad tempore earum deserunt eligendi voluptatem architecto alias sint sunt placeat et, ipsa debitis vitae veniam, repudiandae commodi. Repellendus blanditiis eveniet, dicta sequi facilis minima saepe libero fugiat! Error, cupiditate? Impedit atque eveniet labore expedita eos illum fugit fuga consequuntur nisi, est culpa quos, ex delectus repudiandae sint? Voluptatum cumque corporis hic cupiditate, excepturi, nulla perferendis ab doloribus officia error vitae fuga dolorum deleniti quaerat maiores optio velit obcaec'
     }
 ]
-data = dummyData
+let data = dummyData
 
 console.log(data)
 // renders the latest entry prominent on page
@@ -168,6 +168,8 @@ async function renderPastEntries() {
 
     }
     // TODO:ADD DELETE PAST ENTRIES BUTTON HERE WITH EVENT LISTENERS $deleteBtn ID: deleteBtn-${data[i].id}
+    
+    
     // TODO: ADD EDIT BUTTON FUNCTIONALITY HERE $editBtn ID: editBtn-${data[i].id}
   //DELETE BUTTON IS CALLED $   
     $newEntriesContainer.insertAdjacentElement('afterend', $pastEntriesContainer);
