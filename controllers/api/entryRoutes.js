@@ -1,14 +1,14 @@
 
 const router = require('express').Router();
-const { Entry, User } = require('../../models');
+const { Entry, User, Habit } = require('../../models');
 
 //This is to get all entries
 router.get('/', async (req, res) => {
   try {
     const entries = await Entry.findAll({ 
-       // include: [{ model: User, attributes: [{user_id}] }]
+       include: [{ model: Habit }]
     });
-
+      console.log('entry', req.session)
     res.status(200).json(entries);
 } catch (err) {
   console.error(err);
