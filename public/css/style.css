@@ -40,14 +40,11 @@ button {
     margin-top: 15px;
   
 
-    
 }
 label {
     padding-right: 15px;
     padding-left: 20px;
     
-    
-
 }
 
 form {
@@ -55,5 +52,9 @@ form {
 }
 
 nav {
+    align-items: center;
+}
+
+form {
     align-items: center;
 }
