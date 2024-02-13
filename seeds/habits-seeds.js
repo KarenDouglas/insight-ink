@@ -2,12 +2,12 @@ const Habit = require('../models/Habit')
 const habits = [
     {
       user_id: 1,
-      name: 'Exercise',
+      habit_name: 'Exercise',
       streak: 5,
     },
     {
       user_id: 2,
-      name: 'Meditation',
+      habit_namename: 'Meditation',
       streak: 10,
     },
   ];
