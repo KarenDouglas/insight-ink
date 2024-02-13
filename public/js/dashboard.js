@@ -179,7 +179,21 @@ async function renderPastEntries() {
 
     }
     // TODO:ADD DELETE PAST ENTRIES BUTTON HERE WITH EVENT LISTENERS $deleteBtn ID: deleteBtn-${data[i].id}
-
+    const deletePastEntry2 = (e) => {
+        if(e.target.id.includes('deleteBtn')){
+            let filteredList;
+            const btnId = parseInt(e.target.id.split('deleteBtn-')[1])
+            for(let i = 0; i < data.length -1; i++){
+                if(btnId === data[i].id){
+                 data =  data.filter((el)=>btnId !== el.id  )
+                 renderPastEntries()
+                }
+            }
+            console.log(data)
+            return filteredList
+        }
+     }
+     $pastEntriesContainer.addEventListener('click', deletePastEntry2)
     
     // TODO: ADD EDIT BUTTON FUNCTIONALITY HERE $editBtn ID: editBtn-${data[i].id}
   //DELETE BUTTON IS CALLED $   
