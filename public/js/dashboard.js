@@ -131,7 +131,18 @@ async function renderNewestEntry(){
 
 
     // TODO: ADD DELETE FUNCTIONALITY TO $DELETEBTN WITH EVENT LISTENER HERE $deleteBtn ID : deleteBtn
-    
+    const deleteEntry = async(e) => {
+        if(e.target.id === 'deleteBtn'){
+            $newEntriesContainer.removeChild($entryContainer)
+            $newEntriesContainer.removeChild($deleteBtn)
+            $newEntriesContainer.removeChild($editBtn)
+           data.pop()
+           renderNewestEntry()
+           renderPastEntries()
+           console.log(data)
+        }
+    }
+    deleteBtn.addEventListener('click',deleteEntry)
      // TODO: ADD EDIT BUTTON FUNCTIONALITY HERE  $editBtn ID: editBtn
  };
  
@@ -168,7 +179,7 @@ async function renderPastEntries() {
 
     }
     // TODO:ADD DELETE PAST ENTRIES BUTTON HERE WITH EVENT LISTENERS $deleteBtn ID: deleteBtn-${data[i].id}
-    
+
     
     // TODO: ADD EDIT BUTTON FUNCTIONALITY HERE $editBtn ID: editBtn-${data[i].id}
   //DELETE BUTTON IS CALLED $   
