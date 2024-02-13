@@ -1,3 +1,13 @@
+
+
 <body>
-    
+    {{#each habits as |habit|}}
+    <div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">{{habit.habit_name}}</h5>
+  </div>
+ <p style="font-weight: bold">Streak:</p>
+ <p>{{habit.streak}}</p>
+</div>
+{{/each}}
 </body>

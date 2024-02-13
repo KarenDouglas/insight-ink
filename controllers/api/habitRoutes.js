@@ -3,6 +3,8 @@ const router = require('express').Router();
 const { Habit } = require('../../models');
 
 
+
+
 router.post('/', async (req, res) => {
     try {
       const newHabit = await Habit.create({
