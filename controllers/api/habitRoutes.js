@@ -1,6 +1,7 @@
 
 const router = require('express').Router();
 const { Habit } = require('../../models');
+const withAuth = require('../../utils/auth');
 
 
 
@@ -18,7 +19,7 @@ router.post('/', async (req, res) => {
     }
   });
 
-router.put('/:id', async (req, res) => {
+router.put('/:id', withAuth, async (req, res) => {
   try {
     const habitId = req.params.id;
 
@@ -38,7 +39,7 @@ router.put('/:id', async (req, res) => {
 
 
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id' , async (req, res) => {
   try {
     const habitData = await Habit.destroy({
       where: {

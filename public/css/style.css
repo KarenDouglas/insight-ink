@@ -2,37 +2,43 @@ body {
     background-color: lightgray;
     
     
-}
+/* }
 
 section {
     background-color: lightpink;
     margin-top: 80px;
     height: 450px;
-}
+/* }
 footer {
-    margin-top: 90px;
-    color: white;
-
+        height: 100px; 
+        background-color: #f1f1f1;
+        
 }
-input {
+ */
+/* input {
     margin: 15px;
     padding: 15px;
     font-family: 'Courier New', Courier, monospace;
     font-size: 15px;
-    margin-top: 15px;
+    margin-top: 15px; */
    
+}
+input {
+    margin: 15px
     
 }
+
+
 div {
     margin-left: 10px;
     font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: 15px;
-    /* text-align: center; */
-    
-}
+    /* text-align: center;
+     */
+} */
 
 button {
-    margin: 15px;
+    margin: 25px;
     margin-top: 15px;
     margin-left: 15px;
     width: 100px;
@@ -44,6 +50,8 @@ button {
 label {
     padding-right: 15px;
     padding-left: 20px;
+    height: 25px;
+   
     
 }
 
@@ -58,3 +66,26 @@ nav {
 form {
     align-items: center;
 }
+
+.wrapper {
+    min-height: 100%;
+    margin-bottom: 50px; }
+
+
+    .card {
+        margin-left: 25px;
+        margin: 20px;
+        background-color: lightgray
+        
+    }
+
+    body {
+        background-color: pink;
+        margin-bottom: 15px;
+    }
+
+    footer {
+        height: 95px; 
+        background-color: #f1f1f1; } 
+
+   

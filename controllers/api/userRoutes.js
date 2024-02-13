@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { User } = require('../../models/User');
+const withAuth = require('../../utils/auth');
 
 
 // Routes GET/POST LOGIN/POST LOGOUT/ POST Register
@@ -24,7 +25,7 @@ router.post('/', async (req, res) => {
 });
 
 // Create Login route POST
-router.post('/login', async (req, res) => {
+router.post('/login', withAuth , async (req, res) => {
     try {
         const userLogin = await User.findOne({ 
             where: {
@@ -73,7 +74,7 @@ router.post('/logout', async (req, res) => {
 });
 
 // Create register route
-router.post('/register', async (req, res) => {
+router.post('/register' , withAuth , async (req, res) => {
     try {
         const existingUser = await User.findOne({
             where: {

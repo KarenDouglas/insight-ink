@@ -1,4 +1,5 @@
 const express = require('express');
+const withAuth = require('../utils/auth');
 
 const router = express.Router();
 const { Entry, User, Habit } = require('../models');
@@ -20,14 +21,14 @@ router.get('/', async(req, res)=>{
         entry.get({ plain: true })
       );
           console.log('entry', req.session)
-          res.render('dashboard',{data,entries})
+          res.render('dashboard',{...data,entries})
     } catch (err) {
       console.error(err);
       res.status(500).json({ error: 'Could not get entries.' });
     }
 })
 
-router.get('/new-entry', async (req, res) => {
+router.get('/new-entry', withAuth , async (req, res) => {
     const data = {
         pageTitle: 'Entry',
         buttons: [
