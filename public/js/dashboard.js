@@ -1,3 +1,4 @@
+
 const $newEntriesContainer = document.querySelector('#newEntryContainer')
 
 
@@ -77,9 +78,11 @@ let dummyData = [
 ]
 let data = dummyData
 
-console.log(data)
+
+
 // renders the latest entry prominent on page
 async function renderNewestEntry(){
+console.log('you made it to this page')
     //Delete and Edit Button in DOM
     const $deleteBtn = document.createElement('button')
     const $editBtn = document.createElement('button')
@@ -89,7 +92,6 @@ async function renderNewestEntry(){
     $editBtn.id = 'editBtn'
 
     let newEntry = data[data.length - 1];
-
 
     
     // Rendering habits list

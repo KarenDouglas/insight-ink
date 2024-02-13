@@ -8,7 +8,7 @@ router.get('/', async (req, res) => {
     const entries = await Entry.findAll({ 
        // include: [{ model: User, attributes: [{user_id}] }]
     });
-
+      console.log('entry', req.session)
     res.status(200).json(entries);
 } catch (err) {
   console.error(err);

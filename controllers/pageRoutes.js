@@ -1,16 +1,17 @@
 const express = require('express');
+
 const router = express.Router();
-// const { Entry, User, Habit } = require('../models');
+const { Entry, User, Habit } = require('../models');
 
 router.get('/', async(req, res)=>{
     const data = {
-        pageTitle: 'Dash',
+        pageTitle: 'Dashboard',
         buttons: [
             {text: 'NEW ENTRY', url: '/new-entry' },
             {text: 'HABITS', url: '/habits'},
         ],
     }
-    res.render('home', data)
+    res.render('dashboard', data)
 })
 
 router.get('/new-entry', async (req, res) => {
@@ -36,7 +37,6 @@ router.get('/habits', async (req, res) => {
 
     res.render('habits', data);
 });
-
 
 
 module.exports = router;
