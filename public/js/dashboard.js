@@ -356,5 +356,3 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('closeModalBtn').addEventListener('click', closeModal);
     document.getElementById('saveChangesBtn').addEventListener('click', saveEdits);
 
-renderNewestEntry()
-renderPastEntries()
