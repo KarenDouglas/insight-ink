@@ -22,6 +22,14 @@
                     <button id="editBtn-{{entry.id}}">edit</button>
                 </section>
             </section>
+            <section >
+                  <h2>{{entry.title}}</h2>
+                  <p>{{entry.mood}}</p>
+                  {{#each entry.habits as |habit|}}
+                  <p>{{habit.habit_name}}</p>
+                  {{/each}}
+                  <p>{{entry.description}}</p>
+            </section>
         {{/each}}
     </section>
     <script src="/js/dashboard.js"></script>
