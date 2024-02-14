@@ -17,12 +17,12 @@ module.exports = {
         const habitList = renderHabits(latestEntry.habits);
         return `
         <section>
-            <h2>${latestEntry.title}</h2>
-            <p>${latestEntry.mood}</p>
+            <h2><strong>${latestEntry.title}</stong></h2>
+
+            <p><strong>Mood:</strong> ${latestEntry.mood}</p>
+            <p> <strong>Habits:</strong></p>
             <ul>${habitList}</ul>
             <p>${latestEntry.description}</p>
-            <button id="deleteBtn">delete</button>
-            <button id="editBtn">edit</button>
         </section>
         `;
     }
