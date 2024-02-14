@@ -1,2 +1,2 @@
-DROP DATABASE IF EXISTS insightInk_db;
-CREATE DATABASE insightInk_db;
+DROP DATABASE IF EXISTS insightink_db;
+CREATE DATABASE insightink_db;
