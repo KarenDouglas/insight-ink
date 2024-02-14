@@ -1,45 +1,60 @@
-<body>
-    
-<section id="newEntryFormContainer">
-        <form class="">
-            <div class="">
-                <label for="title">Title:</label>
-                <input class="" type="text" id="newEntryTitle" />
-            </div>
-            <div class="">
-                <label for="newEntry">Entry :</label>
-                <textarea class="" type="text" id="newEntry"></textarea>
-            </div>
-            <form class="">
-              <label for="newHabit">Habit:</label>
-              
-              <input type="checkbox" id="1" name="habitToBeTracked" value="coding">
-            <label for="habit1">Drink water</label><br>
-              <input type="checkbox" id="1" name="habitToBeTracked" value="coding">
-            <label for="habit1">Drink water</label><br>
-              <input type="checkbox" id="1" name="habitToBeTracked" value="coding">
-            <label for="habit1">Drink water</label><br>
-              
-           
-            </form>
-            <div class="">
-              <label for="">Mood</label>
-              <select id="moodSelect">
-                  <option value="happy">Happy</option>
-                  <option value="angry">Angry</option>
-                  <option value="calm">Calm</option>
-                  <option value="anxious">Anxious</option>
-                  <option value="excited">Excited</option>
-              </select>
-            </div>
-            <div>
-              <button class="btn btn-primary" type="submit" id="newEntrySubmitButton">submit</button>
-            </div>
-            <footer class="bg-light text-center ">
-      <div class="wrapper">
-  </div>
-          </form>
-      </section>
 
-      <script src="./public/js/newEntries.js"></script>      
+<body>
+    <section id="newEntryFormContainer" class="card"
+        style="width: 450px; background-color: lightgrey; color: #000;">
+        <form class="card-body">
+            <div class="mb-3">
+                <label for="newEntryTitle" class="form-label">Title:</label>
+                <input class="form-control" type="text" id="newEntryTitle">
+            </div>
+            <div class="mb-3">
+                <label for="newEntry" class="form-label">Entry :</label>
+                <textarea class="form-control" type="text" id="newEntry"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="newHabit" class="form-label">Habit:</label>
+                <div class="form-check">
+                    <input type="checkbox" id="habit1" name="habitToBeTracked" value="coding"
+                        class="form-check-input">
+                    <label for="habit1" class="form-check-label">Drink water</label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" id="habit2" name="habitToBeTracked" value="coding"
+                        class="form-check-input">
+                    <label for="habit2" class="form-check-label">Exercise</label>
+                </div>
+                <!-- Add more habits as needed -->
+            </div>
+            <div class="mb-3">
+                <label for="moodSelect" class="form-label">Mood</label>
+                <select id="moodSelect" class="form-select">
+                    <option value="happy">Happy</option>
+                    <option value="angry">Angry</option>
+                    <option value="calm">Calm</option>
+                    <option value="anxious">Anxious</option>
+                    <option value="excited">Excited</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <button class="btn btn-primary" type="submit" id="newEntrySubmitButton">Submit</button>
+            </div>
+        </form>
+        <footer class="bg-light text-center" style="padding: 10px; color: #000;">
+            <div class="wrapper">
+                <!-- Add your footer content here -->
+              
+            </div>
+        </footer>
+    </section>
+
+    <script src="js/newEntries.js"></script>
 </body>
+
+</html>
+
+
+
+
+
+
+

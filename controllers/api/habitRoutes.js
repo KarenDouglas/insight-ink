@@ -5,8 +5,21 @@ const withAuth = require('../../utils/auth');
 
 
 
-//withAuth
-router.post('/' ,  async (req, res) => {
+router.get('/', async(req, res) => {
+
+  try{
+    const habits = await Habit.findAll()
+  
+  return res.status(200).json(habits)
+  }
+  catch (err) {
+    res.status(400).json(err)
+  } 
+});
+
+
+
+router.post('/', async (req, res) => {
     try {
       const newHabit = await Habit.create({
         ...req.body,
@@ -43,8 +56,7 @@ router.delete('/:id', async (req, res) => {
   try {
     const habitData = await Habit.destroy({
       where: {
-        id: req.params.id,
-        user_id: req.session.user_id,
+        id: req.params.id
       },
     });
 
