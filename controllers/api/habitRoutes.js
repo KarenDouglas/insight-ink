@@ -4,6 +4,19 @@ const { Habit } = require('../../models');
 
 
 
+router.get('/', async(req, res) => {
+
+  try{
+    const habits = await Habit.findAll()
+  
+  return res.status(200).json(habits)
+  }
+  catch (err) {
+    res.status(400).json(err)
+  } 
+});
+
+
 
 router.post('/', async (req, res) => {
     try {
@@ -43,7 +56,6 @@ router.delete('/:id', async (req, res) => {
     const habitData = await Habit.destroy({
       where: {
         id: req.params.id
-        // user_id: req.session.user_id,
       },
     });
 
