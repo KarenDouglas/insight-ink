@@ -20,7 +20,7 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
   try {
     const entry = await Entry.findByPk(req.params.id, {
-      include: [{ model: User, attributes: [{id}] }]
+      // include: [{ model: User, attributes: [{id}] }]
     });
 
     if (!entry) {

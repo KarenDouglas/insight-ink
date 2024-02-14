@@ -1,15 +1,14 @@
 
 
 <body>
-  <button type="button" class="btn btn-light">+ HABIT</button>
     {{#each habits as |habit|}}
-    <div class="card" style="width: 18rem;">
+    <div class="card d-inline-flex m-5" style="width: 18rem;">
       <i class="fa-regular fa-square-minus" data-habit-id="{{habit.id}}" ></i>
   <div class="card-body">
-    <h5 class="card-title">{{habit.habit_name}}</h5>
+    <h5 class="card-title text-center">{{habit.habit_name}}</h5>
   </div>
- <p style="font-weight: bold">Streak:</p>
- <p>{{habit.streak}}</p>
+ <p class="text-center" style="font-weight: bold">Streak:</p>
+ <p class="text-center">{{habit.streak}}</p>
 </div>
 {{/each}}
 <script src="/js/habits.js"></script>
