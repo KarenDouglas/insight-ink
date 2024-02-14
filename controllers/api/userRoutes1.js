@@ -1,7 +1,5 @@
 const router = require('express').Router();
 const { User } = require('../../models/User');
-const bcrypt = require('bcrypt');
-const withAuth = require('../../utils/auth');
 
 
 // Routes GET/POST LOGIN/POST LOGOUT/ POST Register

@@ -1,8 +1,6 @@
 
 const router = require('express').Router();
-const { Entry, User, Habit }  = require('../../models');
-const withAuth = require('../../utils/auth');
-
+const { Entry, Habit }  = require('../../models');
 
 //This is to get all entries withAuth
 router.get('/', withAuth , async (req, res) => {
