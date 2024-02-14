@@ -1,15 +1,17 @@
 
-
 <body>
     {{#each habits as |habit|}}
-    <div class="card d-inline-flex m-5" style="width: 18rem;">
-      <i class="fa-regular fa-square-minus" data-habit-id="{{habit.id}}" ></i>
-  <div class="card-body">
-    <h5 class="card-title text-center">{{habit.habit_name}}</h5>
-  </div>
- <p class="text-center" style="font-weight: bold">Streak:</p>
- <p class="text-center">{{habit.streak}}</p>
-</div>
-{{/each}}
-<script src="/js/habits.js"></script>
+    <div class="card" style="width: 18rem; margin: 15px; background-color: lightgray; border: 1px solid #dee2e6; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); transition: box-shadow 0.3s ease-in-out;">
+        <i class="fa-regular fa-square-minus" data-habit-id="{{habit.id}}" style="font-size: 24px; color: #000; cursor: pointer;"></i>
+        <div class="card-body" style="padding: 1.25rem; text-align: center;">
+            <h5 class="card-title" style="font-size: 1.5rem; margin-bottom: 0.5rem; color: #000;">{{habit.habit_name}}</h5>
+            <p class="streak-label" style="font-weight: bold; margin: 0.5rem 0; color: #6c757d;">Streak:</p>
+            <p class="streak-value" style="margin: 0; color: #495057;">{{habit.streak}}</p>
+        </div>
+    </div>
+    {{/each}}
+    <script src="/js/habits.js"></script>
 </body>
+
+</html>
+

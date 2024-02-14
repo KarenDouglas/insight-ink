@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { User } = require('../../models/User');
+const withAuth = require('../../utils/auth');
 
 
 // Routes GET/POST LOGIN/POST LOGOUT/ POST Register
@@ -63,7 +64,7 @@ router.post('/login', async (req, res) => {
     }
 });
 
-// When Logging out, deleting the session user information.
+// When Logging out, deleting the session user information. withAuth
 router.post('/logout', async (req, res) => {
     if (req.session.logged_in) {
         req.session.destroy(() => {
@@ -75,7 +76,7 @@ router.post('/logout', async (req, res) => {
 });
 
 // Create register route
-router.post('/register', async (req, res) => {
+router.post('/register' , async (req, res) => {
     try {
         const existingUser = await User.findOne({
             where: {
