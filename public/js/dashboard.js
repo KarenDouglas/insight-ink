@@ -249,7 +249,7 @@ async function renderPastEntries() {
     // TODO: ADD EDIT BUTTON FUNCTIONALITY HERE $editBtn ID: editBtn-${data[i].id}
 
     //DELETE BUTTON IS CALLED $   
-    $newEntriesContainer.insertAdjacentElement('afterend', $pastEntriesContainer);
+    
 }
 
 //modal functionality
