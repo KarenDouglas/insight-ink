@@ -25,7 +25,7 @@ router.post('/', async (req, res) => {
 });
 
 // Create Login route POST
-router.post('/login', withAuth , async (req, res) => {
+router.post('/login', async (req, res) => {
     try {
         const userLogin = await User.findOne({ 
             where: {
@@ -63,7 +63,7 @@ router.post('/login', withAuth , async (req, res) => {
 });
 
 // When Logging out, deleting the session user information.
-router.post('/logout', async (req, res) => {
+router.post('/logout', withAuth , async (req, res) => {
     if (req.session.logged_in) {
         req.session.destroy(() => {
             res.status(404).end();
@@ -74,7 +74,7 @@ router.post('/logout', async (req, res) => {
 });
 
 // Create register route
-router.post('/register' , withAuth , async (req, res) => {
+router.post('/register' , async (req, res) => {
     try {
         const existingUser = await User.findOne({
             where: {
