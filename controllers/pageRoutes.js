@@ -68,7 +68,7 @@ catch(err){
 }
 });
 
-router.get('/homepage', async (req, res) => {
+router.get('/users', async (req, res) => {
     try {
         const data = {
             pageTitle: 'Login/Register',
