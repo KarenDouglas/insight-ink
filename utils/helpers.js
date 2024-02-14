@@ -21,8 +21,6 @@ module.exports = {
             <p>${latestEntry.mood}</p>
             <ul>${habitList}</ul>
             <p>${latestEntry.description}</p>
-            <button id="deleteBtn">delete</button>
-            <button id="editBtn">edit</button>
         </section>
         `;
     }
