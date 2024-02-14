@@ -10,6 +10,16 @@ const habits = [
       habit_name: 'Meditation',
       streak: 10,
     },
+    {
+      user_id: 2,
+      habit_name: 'reading',
+      streak: 10,
+    },
+    {
+      user_id: 2,
+      habit_name: 'walking',
+      streak: 10,
+    }
   ];
 
   const seedHabits = () => Habit.bulkCreate(habits);
