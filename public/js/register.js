@@ -1,28 +1,34 @@
 
-const signupFormHandler = async (event) => {
+console.log("it worked")
+
+const signUp = async (event) => {
+    console.log('button clicked')
     event.preventDefault();
-    console.log('it work');
-    const name = document.querySelector('#name-signup').value.trim();
-    const email = document.querySelector('#email-signup').value.trim();
-    const password = document.querySelector('#password-signup').value.trim();
   
-    if (name && email && password) {
-      const response = await fetch('/api/users', {
-        method: 'POST',
-        body: JSON.stringify({ name, email, password }),
-        headers: { 'Content-Type': 'application/json' },
-      });
+    const username = document.querySelector('#typeEmailX').value;
+    const password = document.querySelector('#typePasswordX').value;
+    console.log(username)
+    console.log(password)
   
-      if (response.ok) {
-        document.location.replace('/');
-      } else {
-        alert(response.statusText);
+    if (username && password) {
+      try {
+        const response = await fetch('/api/users/register', {
+          method: 'POST',
+          body: JSON.stringify({ username, password }),
+          headers: { 'Content-Type': 'application/json' },
+        });
+  
+        if (response.ok) {
+          document.location.replace('/');
+        } else {
+          alert('Failed to sign up');
+        }
+      } catch (error) {
+        console.error('Error during fetch:', error);
+        alert('Failed to sign up. Please check your internet connection.');
       }
     }
-    
-  };
+};
 
-
-  document
-  .querySelector('.signup-form')
-  .addEventListener('submit', signupFormHandler);
+document
+  .querySelector('.signup').addEventListener('click', signUp);
