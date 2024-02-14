@@ -1,42 +1,35 @@
 <body>
-    
 <section id="newEntryFormContainer">
-        <form class="">
-            <div class="">
-                <label for="title">Title:</label>
-                <input class="" type="text" id="newEntryTitle" />
-            </div>
-            <div class="">
-                <label for="newEntry">Entry :</label>
-                <textarea class="" type="text" id="newEntry"></textarea>
-            </div>
-            <form class="">
-              <label for="newHabit">Habit:</label>
-              
-              <input type="checkbox" id="1" name="habitToBeTracked" value="coding">
-            <label for="habit1">Drink water</label><br>
-              <input type="checkbox" id="1" name="habitToBeTracked" value="coding">
-            <label for="habit1">Drink water</label><br>
-              <input type="checkbox" id="1" name="habitToBeTracked" value="coding">
-            <label for="habit1">Drink water</label><br>
-              
-           
-            </form>
-            <div class="">
-              <label for="">Mood</label>
-              <select id="moodSelect">
-                  <option value="happy">Happy</option>
-                  <option value="angry">Angry</option>
-                  <option value="calm">Calm</option>
-                  <option value="anxious">Anxious</option>
-                  <option value="excited">Excited</option>
-              </select>
-            </div>
-            <div>
-              <button class="btn btn-primary" type="submit" id="newEntrySubmitButton">submit</button>
-            </div>
-          </form>
-      </section>
-
-      <script src="js/newEntries.js"></script>      
+    <form class="">
+        <div class="">
+            <label for="title">Title:</label>
+            <input class="" type="text" id="newEntryTitle" />
+        </div>
+        <div class="">
+            <label for="newEntry">Entry :</label>
+            <textarea class="" type="text" id="newEntry"></textarea>
+        </div>
+        <div class="">
+            <label for="newHabit">Habit:</label>
+            {{#each habits}}
+                <input type="checkbox" id="{{id}}" name="habitToBeTracked" value="{{id}}">
+                <label for="{{id}}">{{habit_name}}</label><br>
+            {{/each}}
+        </div>
+        <div class="">
+            <label for="">Mood</label>
+            <select id="moodSelect">
+                <option value="happy">Happy</option>
+                <option value="angry">Angry</option>
+                <option value="calm">Calm</option>
+                <option value="anxious">Anxious</option>
+                <option value="excited">Excited</option>
+            </select>
+        </div>
+        <div>
+            <button class="btn btn-primary" type="submit" id="newEntrySubmitButton">submit</button>
+        </div>
+    </form>
+</section>
+<script src="./js/newEntries.js"></script>
 </body>
