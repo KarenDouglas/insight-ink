@@ -36,8 +36,16 @@ router.get('/new-entry', async (req, res) => {
             { text: 'HABITS', url: '/habits' },
         ],
     };
-
-    res.render('entry', data);
+    try{
+        const habitsData = await Habit.findAll()
+        const habits = habitsData.map((habit) =>
+        habit.get({ plain: true }))
+        res.render('entry', {...data, habits});
+     
+      }
+      catch (err) {
+        res.status(500).json({ error: 'Could not get habits.' });
+      } 
 });
 
 router.get('/habits', async (req, res) => {
