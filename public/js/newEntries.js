@@ -70,7 +70,7 @@ const $newHabitCheckboxes = document.querySelectorAll('input[name="habitToBeTrac
             throw new Error('Network response was not ok');
         }
         const responseData = await response.json();
-        // window.location.href = '/';
+        window.location.href = '/';
         return responseData;
     } catch (err) {
         console.error(err);
