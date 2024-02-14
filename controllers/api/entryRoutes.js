@@ -47,9 +47,9 @@ router.post('/newEntry', async (req, res) => {
   });
 
   //Edit entry
-  router.put('/:user_id', async (req, res) => {
+  router.put('/:id', async (req, res) => {
     try {
-        const editEntry = await Entry.edit(req.body, {
+        const editEntry = await Entry.update(req.body, {
             where: {
                 id: req.params.id,
             },
