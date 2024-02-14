@@ -206,29 +206,34 @@ async function renderPastEntries() {
 document.addEventListener('DOMContentLoaded', () => {
     const blogPosts = document.querySelectorAll('.blog-card');
 
-    blogCards.forEach(card => {
-        card.addEventListener('click', async () => {
-          const entryId = card.dataset.entryId;
+    //blogPosts.forEach(post => {
+       // card.addEventListener('click', async () => {
+          //const entryId = post.dataset.entryId;
+
+          async function openEditModal(entryId) {
 
           try {
-            const response = await fetch(`/api/entry/${entryId}`);
-            const olderEntryData = await response.json();
+            const response = await fetch(`/api/${entryId}`);
+            const entryData = await response.json();
 
-            renderBlogPostDetails(olderEntryData);
-            openModal();
+            renderBlogPostDetails(entryData);
+            openEditModal();
 
           } catch (error) {
             console.error('Error fetching post:', error);
           }
+        }
         });
 
-        function openModal() {
-            $modal.style.display = 'block';
+        //function openEditModal() {
+            const modal = document.getElementById('entryModal');
+            modal.style.display = 'block';
             document.getElementById('updateMessage').style.display = 'none'; 
-        }
+        //}
 
         function closeModal() {
-            $modal.style.display = 'none';
+            const modal = document.getElementById('entryModal');
+            modal.style.display = 'none';
         }
 
         function saveEdits() {
@@ -258,12 +263,10 @@ document.addEventListener('DOMContentLoaded', () => {
         // Closes the modal after saving edits
         setTimeout(() => {
             closeModal();
-            // Hide the update message after a few seconds
             document.getElementById('updateMessage').style.display = 'none';
         }, 2000); 
     }
-});
+;
   
 renderNewestEntry()
 renderPastEntries()
-})

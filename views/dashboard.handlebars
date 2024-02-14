@@ -4,7 +4,7 @@
             {{#each entries as |entry|}}
             <section id={{entry.id}}>
                   <button id="deleteBtn-{{entry.id}}">delete</button>
-                  <button id="editBtn-{{entry.id}}">edit</button>
+                  <button id="editBtn-{{entry.id}}" onclick="openEditModal('{{entry.id}}')">edit</button>
             </section>
             <section >
                   <h2>{{entry.title}}</h2>
@@ -22,12 +22,16 @@
     <div id="entryModal" class="modal"></div>
         <!-- Modal content -->
         <div class="modal-content">
-    <span class="close-btn" onclick="closeModal()">&times;</span>
-    <h2 id="modalTitle"></h2>
-    <p id="modalMood"></p>
+    <span class="close-btn" onclick="closeModal()"></span>
+    <h2 id="modalTitle">{{modalTitle}}</h2>
+    <p id="modalMood">{{modalMood}}</p>
     <h3>Habits:</h3>
-    <ul id="modalHabits"></ul>
-    <p id="modalEntryText"></p>
+    <ul id="modalHabits">
+      {{#each modalHabits}}
+                <li>{{this}}</li>
+            {{/each}}
+    </ul>
+    <p id="modalEntryText">{{modalEntryText}}</p>
     <button id="submitBtn" onclick="saveEdits()">Submit</button>
   </div>
 </div>
