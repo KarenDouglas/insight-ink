@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const User = require('../../models/User');
 
+
 router.post('/', async (req, res) => {
     try{
         const newUser = await User.create(req.body);
@@ -63,6 +64,7 @@ router.post('/logout', async (req, res) => {
 // Create register route
 router.post('/register' , async (req, res) => {
     try {
+        console.log('made it this far')
         const existingUser = await User.findOne({
             where: {
                 username: req.body.username,

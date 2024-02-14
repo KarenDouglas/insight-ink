@@ -1,25 +1,24 @@
 <body>
     <section id="newEntryContainer">
         <section id="entryContainer">
-            {{#if entries.[0].title}}
+            {{#if entries.[0]}}
                 {{{renderLastEntry entries}}}
             {{/if}}
         </section>
     </section>
     <section id="pastEntriesContainer">
         {{#each entries as |entry|}}
-            <section id="{{entry.id}}">
+            <section id="{{entry.id}}" class="pastEntry">
                 <section>
-                    <h2>{{entry.title}}</h2>
-                    <p>{{entry.mood}}</p>
+                    <h2><strong>{{entry.title}}</strong></h2>
+                    <p> <strong>Mood:</strong> {{entry.mood}}</p>
+                    <p> <strong>Habits:</strong></p>
                     <ul>
                         {{#each entry.habits as |habit|}}
                             <li>{{habit.habit_name}}</li>
                         {{/each}}
                     </ul>
                     <p>{{entry.description}}</p>
-                    <button id="deleteBtn-{{entry.id}}">delete</button>
-                    <button id="editBtn-{{entry.id}}">edit</button>
                 </section>
             </section>
         {{/each}}
@@ -44,12 +43,7 @@
     </div>
   </div>
 </div>
-
-
      <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
       <script src="/js/dashboard.js"></script>
 </body>
-
-
-       
 

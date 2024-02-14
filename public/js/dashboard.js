@@ -254,26 +254,55 @@ async function renderPastEntries() {
 
 //modal functionality
 document.addEventListener('DOMContentLoaded', () => {
-    const blogCards = document.querySelectorAll('.blog-card');
+    const pastEntriesContainer = document.getElementById('pastEntriesContainer');
     const $modal = document.getElementById('entryModal');
     let editedBlogPost = null;
 
-    blogCards.forEach(card => {
-        card.addEventListener('click', async () => {
-            const entryId = card.dataset.entryId;
+    const saveChangesBtn = document.getElementById('saveChangesBtn');
 
-            try {
-                const response = await fetch(`/api/entry/${entryId}`);
-                const olderEntryData = await response.json();
+    saveChangesBtn.addEventListener('click', () => {
+        const updatedTitle = document.getElementById('modalTitleInput').value;
+        const updatedBodyText = document.getElementById('modalBodyTextInput').value;
 
-                renderBlogPostDetails(olderEntryData);
-                openModal();
+    //blogCards.forEach(card => {
+        //card.addEventListener('click', async () => {
+           // const entryId = card.dataset.entryId;
 
-            } catch (error) {
-                console.error('Error fetching post:', error);
-            }
-        });
+           // try {
+                //const response = await fetch(`/api/entry/${entryId}`);
+               // const olderEntryData = await response.json();
+
+                //renderBlogPostDetails(olderEntryData);
+                //openModal();
+
+           // } catch (error) {
+           //     console.error('Error fetching post:', error);
+            //}
+       // });
+   // });
     });
+});
+   $pastEntriesContainer.addEventListener('click', async (event) => {
+    const clickedEntry = event.target.closest('.blog-card');
+
+    if (clickedEntry) {
+        const entryId = clickedEntry.dataset.entryId;
+
+        try {
+            const response = await fetch(`/api/entry/${entryId}`);
+            const entryData = await response.json();
+
+            
+            renderHandlebarsTemplate('modal-template', entryData);
+
+            openModal();
+        } catch (error) {
+            console.error('Error fetching entry:', error);
+    
+        }
+   }
+},
+);
 
     function openModal() {
         $modal.style.display = 'block';
@@ -308,15 +337,22 @@ document.addEventListener('DOMContentLoaded', () => {
             updateMessage.textContent = 'Your post has been updated!';
             updateMessage.style.display = 'block';
 
+            const updatedData = {
+                modalTitle: 'Updated Title',
+                modalBodyText: 'Updated Body Text'
+            };
+
+            renderHandlebarsTemplate('modal-template', updatedData);
+    }
             // Closes the modal after saving edits
             setTimeout(() => {
                 closeModal();
                 updateMessage.style.display = 'none';
             }, 2000);
-        }
-    }
+        };
+    
 
     // Add event listeners for close and submit buttons
-    document.getElementById('closeBtn').addEventListener('click', closeModal);
-    document.getElementById('submitBtn').addEventListener('click', saveEdits);
-});
+    document.getElementById('closeModalBtn').addEventListener('click', closeModal);
+    document.getElementById('saveChangesBtn').addEventListener('click', saveEdits);
+
