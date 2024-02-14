@@ -252,6 +252,7 @@ async function renderPastEntries() {
     $newEntriesContainer.insertAdjacentElement('afterend', $pastEntriesContainer);
 }
 
+//modal functionality
 document.addEventListener('DOMContentLoaded', () => {
     const blogCards = document.querySelectorAll('.blog-card');
     const $modal = document.getElementById('entryModal');
