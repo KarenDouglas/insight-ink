@@ -32,7 +32,7 @@ router.post('/', async (req, res) => {
     }
   });
 //withAuth
-router.put('/:id',withAuth, async (req, res) => {
+router.put('/:id', async (req, res) => {
   try {
     const habitId = req.params.id;
 
@@ -52,7 +52,7 @@ router.put('/:id',withAuth, async (req, res) => {
 
 
 //withAuth
-router.delete('/:id',withAuth, async (req, res) => {
+router.delete('/:id', async (req, res) => {
   try {
     const habitData = await Habit.destroy({
       where: {
