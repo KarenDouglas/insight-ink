@@ -39,8 +39,8 @@ router.get('/new-entry', async (req, res) => {
 
     res.render('entry', data);
 });
-
-router.get('/habits', withAuth , async (req, res) => {
+//withAuth
+router.get('/habits', async (req, res) => {
 
     try{
     const data = {

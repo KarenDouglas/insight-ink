@@ -5,8 +5,8 @@ const withAuth = require('../../utils/auth');
 
 
 
-
-router.post('/' , withAuth, async (req, res) => {
+//withAuth
+router.post('/' ,  async (req, res) => {
     try {
       const newHabit = await Habit.create({
         ...req.body,
@@ -18,8 +18,8 @@ router.post('/' , withAuth, async (req, res) => {
       return res.status(400).json(err);
     }
   });
-
-router.put('/:id' , withAuth , async (req, res) => {
+//withAuth
+router.put('/:id' , async (req, res) => {
   try {
     const habitId = req.params.id;
 
@@ -38,8 +38,8 @@ router.put('/:id' , withAuth , async (req, res) => {
 });
 
 
-
-router.delete('/:id', withAuth , async (req, res) => {
+//withAuth
+router.delete('/:id', async (req, res) => {
   try {
     const habitData = await Habit.destroy({
       where: {
