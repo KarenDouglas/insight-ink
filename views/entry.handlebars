@@ -11,19 +11,13 @@
                 <label for="newEntry" class="form-label">Entry :</label>
                 <textarea class="form-control" type="text" id="newEntry"></textarea>
             </div>
-            <div class="mb-3">
-                <label for="newHabit" class="form-label">Habit:</label>
+            <div class="mb-3">            
+                <label for="newHabit" class="form-label">Habit:</label>    {{#each habits}}
                 <div class="form-check">
-                    <input type="checkbox" id="habit1" name="habitToBeTracked" value="coding"
-                        class="form-check-input">
-                    <label for="habit1" class="form-check-label">Drink water</label>
+                <input type="checkbox" id="{{id}}" name="habitToBeTracked" value="{{id}}">
+                <label for="{{id}}">{{habit_name}}</label><br>
                 </div>
-                <div class="form-check">
-                    <input type="checkbox" id="habit2" name="habitToBeTracked" value="coding"
-                        class="form-check-input">
-                    <label for="habit2" class="form-check-label">Exercise</label>
-                </div>
-                <!-- Add more habits as needed -->
+            {{/each}}
             </div>
             <div class="mb-3">
                 <label for="moodSelect" class="form-label">Mood</label>
