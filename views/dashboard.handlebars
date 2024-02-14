@@ -1,21 +1,29 @@
 <body>
-      <section id="newEntryContainer">
-            {{#each entries as |entry|}}
-            <section id={{entry.id}}>
-                  <button id="deleteBtn-{{entry.id}}">delete</button>
-                  <button id="editBtn-{{entry.id}}">edit</button>
+    <section id="newEntryContainer">
+        <section id="entryContainer">
+            {{#if entries.[0].title}}
+                {{{renderLastEntry entries}}}
+            {{/if}}
+        </section>
+    </section>
+    <section id="pastEntriesContainer">
+        {{#each entries as |entry|}}
+            <section id="{{entry.id}}">
+                <section>
+                    <h2>{{entry.title}}</h2>
+                    <p>{{entry.mood}}</p>
+                    <ul>
+                        {{#each entry.habits as |habit|}}
+                            <li>{{habit.habit_name}}</li>
+                        {{/each}}
+                    </ul>
+                    <p>{{entry.description}}</p>
+                    <button id="deleteBtn-{{entry.id}}">delete</button>
+                    <button id="editBtn-{{entry.id}}">edit</button>
+                </section>
             </section>
-            <section >
-                  <h2>{{entry.title}}</h2>
-                  <p>{{entry.mood}}</p>
-                  {{#each entry.habits as |habit|}}
-                  <p>{{habit.habit_name}}</p>
-                  {{/each}}
-                  <p>{{entry.description}}</p>
-            </section>
-
-            {{/each}}
-      </section>
+        {{/each}}
+    </section>
       
 <div id="entryModal" class="modal">
     <!-- Modal content -->
@@ -40,8 +48,5 @@
 </body>
 
 
-        {{/each}}
-    </section>
-    <script src="/js/dashboard.js"></script>
-</body>
+       
 
