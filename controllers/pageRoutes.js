@@ -1,4 +1,5 @@
 const express = require('express');
+const withAuth = require('../utils/auth');
 
 const router = express.Router();
 const { Entry, User, Habit } = require('../models');
@@ -47,7 +48,7 @@ router.get('/new-entry', async (req, res) => {
         res.status(500).json({ error: 'Could not get habits.' });
       } 
 });
-
+//withAuth
 router.get('/habits', async (req, res) => {
 
     try{
