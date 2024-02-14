@@ -1,4 +1,3 @@
-
 const $newEntriesContainer = document.querySelector('#newEntryContainer')
 
 
@@ -76,15 +75,11 @@ let dummyData = [
         entry: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus aliquam omnis porro, ad tempore earum deserunt eligendi voluptatem architecto alias sint sunt placeat et, ipsa debitis vitae veniam, repudiandae commodi. Repellendus blanditiis eveniet, dicta sequi facilis minima saepe libero fugiat! Error, cupiditate? Impedit atque eveniet labore expedita eos illum fugit fuga consequuntur nisi, est culpa quos, ex delectus repudiandae sint? Voluptatum cumque corporis hic cupiditate, excepturi, nulla perferendis ab doloribus officia error vitae fuga dolorum deleniti quaerat maiores optio velit obcaec'
     }
 ]
-let data = dummyData
-
+data = dummyData
 
 console.log(data)
-
 // renders the latest entry prominent on page
 async function renderNewestEntry(){
-    data = await getData()
-    
     //Delete and Edit Button in DOM
     const $deleteBtn = document.createElement('button')
     const $editBtn = document.createElement('button')
@@ -95,7 +90,8 @@ async function renderNewestEntry(){
 
     let newEntry = data[data.length - 1];
 
-    console.log(newEntry)
+
+    
     // Rendering habits list
     const renderHabitsList = () => {
         const $habitsListUl = document.createElement('ul');
@@ -145,6 +141,7 @@ async function renderNewestEntry(){
             renderPastEntries()
             console.log(data)
         }
+      
     }
     $deleteBtn.addEventListener('click', deleteEntry);
 
@@ -245,7 +242,6 @@ async function renderPastEntries() {
                 }
             }
             console.log(data)
-            return filteredList
         }
     }
     $pastEntriesContainer.addEventListener('click', deletePastEntry2)
@@ -255,5 +251,3 @@ async function renderPastEntries() {
     //DELETE BUTTON IS CALLED $   
     $newEntriesContainer.insertAdjacentElement('afterend', $pastEntriesContainer);
 }
-renderNewestEntry()
-renderPastEntries()
