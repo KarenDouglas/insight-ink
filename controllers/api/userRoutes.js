@@ -65,7 +65,7 @@ router.post('/login', async (req, res) => {
 });
 
 // When Logging out, deleting the session user information. withAuth
-router.post('/logout', async (req, res) => {
+router.post('/logout',withAuth, async (req, res) => {
     if (req.session.logged_in) {
         req.session.destroy(() => {
             res.status(404).end();

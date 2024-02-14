@@ -29,7 +29,7 @@ router.get('/', async(req, res)=>{
     }
 })
 //withAuth
-router.get('/new-entry', async (req, res) => {
+router.get('/new-entry',withAuth, async (req, res) => {
     const data = {
         pageTitle: 'Entry',
         buttons: [
@@ -49,7 +49,7 @@ router.get('/new-entry', async (req, res) => {
       } 
 });
 //withAuth
-router.get('/habits', async (req, res) => {
+router.get('/habits',withAuth, async (req, res) => {
 
     try{
     const data = {
