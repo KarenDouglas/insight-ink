@@ -36,7 +36,7 @@ router.post('/login', async (req, res) => {
         if (!userLogin) {
             console.log(error);
             res.status(400).json({
-                message: "Wrong username. Please try again."
+                message: "Incorrect username. Please try again."
             });
             return;
         } 
@@ -46,7 +46,7 @@ router.post('/login', async (req, res) => {
         if (!validPassword) {  
             console.log(error);
             res.status(400).json({
-                message: "Wrong password. Please try again."
+                message: "Incorrect password. Please try again."
             });
             return;
         }
