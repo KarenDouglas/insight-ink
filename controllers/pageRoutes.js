@@ -21,7 +21,7 @@ router.get('/', async(req, res)=>{
         entry.get({ plain: true })
       );
           console.log('entry', entries)
-          res.render('dashboard',{...data,entries})
+          res.render('dashboard',{...data, entries})
           console.log
     } catch (err) {
       console.error(err);
