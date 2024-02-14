@@ -23,8 +23,6 @@ module.exports = {
             <p> <strong>Habits:</strong></p>
             <ul>${habitList}</ul>
             <p>${latestEntry.description}</p>
-            <button id="deleteBtn">delete</button>
-            <button id="editBtn">edit</button>
         </section>
         `;
     }
