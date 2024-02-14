@@ -1,10 +1,11 @@
 const loginFormHandler = async (event) => {
     // Stop the browser from submitting the form so we can do so with JavaScript
     event.preventDefault();
-    console.log('it working');
     // Gather the data from the form elements on the page
     const username = document.querySelector('#typeEmailX').value.trim();
     const password = document.querySelector('#typePasswordX').value.trim();
+    console.log('user',username);
+    console.log('passwor',password);
   
     if (username && password) {
       console.log(username);
@@ -25,6 +26,6 @@ const loginFormHandler = async (event) => {
   };
 
     document
-  .querySelector('.login-form')
-  .addEventListener('click', loginFormHandler);
+  .querySelector('#loginForm')
+  .addEventListener('submit', loginFormHandler);
 

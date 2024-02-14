@@ -1,6 +1,12 @@
 const router = require('express').Router();
-const User = require('../../models/User');
+const { User } = require('../../models/User');
+const bcrypt = require('bcrypt');
+const withAuth = require('../../utils/auth');
 
+
+// Routes GET/POST LOGIN/POST LOGOUT/ POST Register
+
+// Create a new User
 router.post('/', async (req, res) => {
     try{
         const newUser = await User.create(req.body);
@@ -19,37 +25,47 @@ router.post('/', async (req, res) => {
     }
 });
 
-// Added comments describing the functionality of this `login` route
+// Create Login route POST
 router.post('/login', async (req, res) => {
+    console.log('wassup-------------------------------------', req.body)
     try {
-        // we search the DB for a user with the provided email
-        const userData = await User.findOne({ where: { username: req.body.username } });
-        if (!userData) {
-            // the error message shouldn't specify if the login failed because of wrong email or password
-            res.status(404).json({ message: 'Login failed. Please try again!' });
+        const userLogin = await User.findOne({ 
+            where: {
+                username: req.body.username,
+            },
+        });
+        if (!userLogin) {
+            console.log(error);
+            res.status(400).json({
+                message: "Incorrect username. Please try again."
+            });
+            return;
+        } 
+
+        const validPassword = await userLogin.checkPassword(req.body.password);
+        
+        if (!validPassword) {  
+            console.log(error);
+            res.status(400).json({
+                message: "Incorrect password. Please try again."
+            });
             return;
         }
-        // use `bcrypt.compare()` to compare the provided password and the hashed password
-      
-            const validateP = () => {
-                if(req.body.password === userData.password){
-                    return true
-                }else{
-                    return fale
-                }
-            }
-       
-    // if they do not match, return error message
-    if (!validateP()) {
-      res.status(400).json({ message: 'Login failed. Please try again!' });
-      return;
+
+        req.session.save(() => {
+            req.session.user_id = userLogin.id;
+            req.session.logged_in = true;
+        
+            res.json({ user: userLogin, message: 'You are logged in.' });
+        });
+    } catch (err) {
+        res.status(500).json({
+            message: 'Cannot log in.'
+        });
     }
-    // if they do match, return success message
-    res.status(200).json({ message: 'You are now logged in!' });
-  } catch (err) {
-    res.status(500).json(err);
-  }
 });
+
+// When Logging out, deleting the session user information. withAuth
 router.post('/logout', async (req, res) => {
     if (req.session.logged_in) {
         req.session.destroy(() => {
