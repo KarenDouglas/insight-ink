@@ -19,8 +19,9 @@ router.get('/', async(req, res)=>{
         const entries = entriesData.map((entry) =>
         entry.get({ plain: true })
       );
-          console.log('entry', req.session)
+          console.log('entry', entries)
           res.render('dashboard',{...data,entries})
+          console.log
     } catch (err) {
       console.error(err);
       res.status(500).json({ error: 'Could not get entries.' });
