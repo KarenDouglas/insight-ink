@@ -251,5 +251,73 @@ async function renderPastEntries() {
     //DELETE BUTTON IS CALLED $   
     $newEntriesContainer.insertAdjacentElement('afterend', $pastEntriesContainer);
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    const blogCards = document.querySelectorAll('.blog-card');
+    const $modal = document.getElementById('entryModal');
+    let editedBlogPost = null;
+
+    blogCards.forEach(card => {
+        card.addEventListener('click', async () => {
+            const entryId = card.dataset.entryId;
+
+            try {
+                const response = await fetch(`/api/entry/${entryId}`);
+                const olderEntryData = await response.json();
+
+                renderBlogPostDetails(olderEntryData);
+                openModal();
+
+            } catch (error) {
+                console.error('Error fetching post:', error);
+            }
+        });
+    });
+
+    function openModal() {
+        $modal.style.display = 'block';
+        document.getElementById('updateMessage').style.display = 'none';
+    }
+
+    function closeModal() {
+        $modal.style.display = 'none';
+    }
+
+    function saveEdits() {
+        // Checks if any edits were made
+        if (editedBlogPost !== null) {
+            // Get the edited values from the modal
+            const editedTitle = document.getElementById('modalTitle').textContent;
+            const editedMood = document.getElementById('modalMood').textContent;
+            const editedEntry = document.getElementById('modalEntryText').textContent;
+
+            // Updates the edited information in the original post data
+            editedBlogPost.title = editedTitle;
+            editedBlogPost.mood = editedMood;
+            editedBlogPost.entry = editedEntry;
+
+            // Re-renders the blog post with the edited information
+            renderBlogPostDetails(editedBlogPost);
+
+            // Resets the editedBlogPost variable after saving
+            editedBlogPost = null;
+
+            // Displays a message letting you know your post has been updated
+            const updateMessage = document.getElementById('updateMessage');
+            updateMessage.textContent = 'Your post has been updated!';
+            updateMessage.style.display = 'block';
+
+            // Closes the modal after saving edits
+            setTimeout(() => {
+                closeModal();
+                updateMessage.style.display = 'none';
+            }, 2000);
+        }
+    }
+
+    // Add event listeners for close and submit buttons
+    document.getElementById('closeBtn').addEventListener('click', closeModal);
+    document.getElementById('submitBtn').addEventListener('click', saveEdits);
+});
 renderNewestEntry()
 renderPastEntries()

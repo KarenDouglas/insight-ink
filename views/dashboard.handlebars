@@ -15,5 +15,26 @@
             </section>
             {{/each}}
       </section>
+      
+<div id="entryModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close-btn" id="closeBtn">&times;</span>
+        <h2 id="modalTitle">{{modalTitle}}</h2>
+        <p id="modalMood">{{modalMood}}</p>
+        <h3>Habits:</h3>
+        <ul id="modalHabits">
+            {{#each modalHabits}}
+                <li>{{this}}</li>
+            {{/each}}
+        </ul>
+        <p id="modalEntryText">{{modalEntryText}}</p>
+        <button id="submitBtn">Submit</button>
+    </div>
+</div>
+
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
       <script src="/js/dashboard.js"></script>
 </body>
+
