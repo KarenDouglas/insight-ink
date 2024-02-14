@@ -1,41 +1,52 @@
 <body>
-      <section id="newEntryContainer">
-            {{#each entries as |entry|}}
-            <section id={{entry.id}}>
-                  <button id="deleteBtn-{{entry.id}}">delete</button>
-                  <button id="editBtn-{{entry.id}}">edit</button>
+    <section id="newEntryContainer">
+        <section id="entryContainer">
+            {{#if entries.[0].title}}
+                {{{renderLastEntry entries}}}
+            {{/if}}
+        </section>
+    </section>
+    <section id="pastEntriesContainer">
+        {{#each entries as |entry|}}
+            <section id="{{entry.id}}">
+                <section>
+                    <h2>{{entry.title}}</h2>
+                    <p>{{entry.mood}}</p>
+                    <ul>
+                        {{#each entry.habits as |habit|}}
+                            <li>{{habit.habit_name}}</li>
+                        {{/each}}
+                    </ul>
+                    <p>{{entry.description}}</p>
+                    <button id="deleteBtn-{{entry.id}}">delete</button>
+                    <button id="editBtn-{{entry.id}}">edit</button>
+                </section>
             </section>
-            <section >
-                  <h2>{{entry.title}}</h2>
-                  <p>{{entry.mood}}</p>
-                  {{#each entry.habits as |habit|}}
-                  <p>{{habit.habit_name}}</p>
-                  {{/each}}
-                  <p>{{entry.description}}</p>
-            </section>
-
-            {{/each}}
-      </section>
+        {{/each}}
+    </section>
       
-<div id="entryModal" class="modal">
-    <!-- Modal content -->
+<div class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
     <div class="modal-content">
-        <span class="close-btn" id="closeBtn">&times;</span>
-        <h2 id="modalTitle">{{modalTitle}}</h2>
-        <p id="modalMood">{{modalMood}}</p>
-        <h3>Habits:</h3>
-        <ul id="modalHabits">
-            {{#each modalHabits}}
-                <li>{{this}}</li>
-            {{/each}}
-        </ul>
-        <p id="modalEntryText">{{modalEntryText}}</p>
-        <button id="submitBtn">Submit</button>
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalTitle">{{modalTitle}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p id="modalBodyText">{{modalBodyText}}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="saveChangesBtn">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeModalBtn">Close</button>
+      </div>
     </div>
+  </div>
 </div>
 
 
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
       <script src="/js/dashboard.js"></script>
 </body>
 
