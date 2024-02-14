@@ -68,5 +68,23 @@ catch(err){
 }
 });
 
+router.get('/users', async (req, res) => {
+    try {
+        const data = {
+            pageTitle: 'Login/Register',
+            buttons: [
+                { text: 'Login' },
+                { text: 'Register' },
+            ],
+        };
+        {
+            res.render('home', data);
+        };
+    } catch (err) {
+        res.status(500).json({
+            message: 'Could not register/login.'
+        });
+    }
+});
 
 module.exports = router;
