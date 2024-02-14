@@ -1,17 +1,18 @@
 <body>
     <section id="newEntryContainer">
         <section id="entryContainer">
-            {{#if entries.[0].title}}
+            {{#if entries.[0]}}
                 {{{renderLastEntry entries}}}
             {{/if}}
         </section>
     </section>
     <section id="pastEntriesContainer">
         {{#each entries as |entry|}}
-            <section id="{{entry.id}}">
+            <section id="{{entry.id}}" class="pastEntry">
                 <section>
-                    <h2>{{entry.title}}</h2>
-                    <p>{{entry.mood}}</p>
+                    <h2><strong>{{entry.title}}</strong></h2>
+                    <p> <strong>Mood:</strong> {{entry.mood}}</p>
+                    <p> <strong>Habits:</strong></p>
                     <ul>
                         {{#each entry.habits as |habit|}}
                             <li>{{habit.habit_name}}</li>
