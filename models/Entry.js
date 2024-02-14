@@ -18,6 +18,10 @@ Entry.init(
       type: DataTypes.STRING(200),
       allowNull: false,
     },
+    mood: {
+      type: DataTypes.STRING(200),
+      allowNull: false,
+    },
     description: {
       type: DataTypes.TEXT,
       allowNull: false,
