@@ -28,7 +28,7 @@ router.get('/', async(req, res)=>{
       res.status(500).json({ error: 'Could not get entries.' });
     }
 })
-
+//withAuth
 router.get('/new-entry', async (req, res) => {
     const data = {
         pageTitle: 'Entry',
